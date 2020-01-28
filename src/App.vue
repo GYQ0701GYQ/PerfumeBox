@@ -1,9 +1,12 @@
 <!--展示模板-->
 <template>
   <div id="app">
-    <img src="./assets/demo1.jpg" width="1530px">
+    <img src="./assets/demo1.jpg" width="530px">
+    <b>TESSSSST</b>
 <!--    <router-view/>-->
-    <Hello></Hello>
+    <Hello>
+      <b>TEEEEST</b>
+    </Hello>
   </div>
 </template>
 
