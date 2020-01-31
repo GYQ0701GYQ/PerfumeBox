@@ -1,0 +1,117 @@
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  background-color:#EFFBFE;
+  /*#DFF7FD*/
+  margin-top: 0px;
+}
+#banner{
+  height: 260px;
+  background: center;
+  background-size: 100% 100%;
+}
+#xinshougroup{
+  padding:8px 0px;
+  width: 120px;
+  font-family: 'Microsoft YaHei';
+  font-size: 16px;
+  float: left;
+  color: #707070;
+  cursor: pointer;
+}
+.sameline{
+  display: inline;
+  vertical-align: middle;
+}
+#logingroup{
+  padding:8px 0px;
+  width: 120px;
+  font-family: 'Microsoft YaHei';
+  font-size: 16px;
+  float: right;
+  color: #707070;
+  cursor: pointer;
+}
+#perfumebox_logo{
+  padding:0px ;
+  display: inline;
+}
+#searchgroup{
+  width: 380px;
+  margin:auto;
+  font-family: 'Microsoft YaHei';
+  font-size: 14px;
+}
+#search{
+  width: 260px;
+  border: 1px solid #e2e2e2;
+  height: 30px;
+  float: left;
+  background-image: url(./assets/search.png);
+  background-repeat: no-repeat;
+  background-size: 25px;
+  background-position:5px center;
+  padding:0 0 0 40px;
+}
+#searchbtn{
+  width: 78px;
+  height: 32px;
+  float: right;
+  background: darkgray;
+  color: white;
+  text-align: center;
+  line-height: 32px;
+  cursor: pointer;
+  font-family: 'Microsoft YaHei';
+}
+/*#navigation{*/
+/*  height: 50px;*/
+/*  background-color:#DFF7FD;*/
+/*}*/
+.navigationFixed{
+  position:fixed;
+  background-color:#DFF7FD;
+  border:1px solid #707070;
+  top:0;
+  z-index:999;
+  WIDTH: 99%;
+  line-height: 50px;
+  display: flex;
+  margin: 0px;
+  padding: 0px;
+}
+.navigationUnFixed{
+  background-color:#DFF7FD;
+  border:1px solid #707070;
+  WIDTH: 100%;
+  line-height: 50px;
+  display: flex;
+  margin: 0px;
+  padding: 0px;
+}
+/*ul {*/
+/*  WIDTH: 100%;*/
+/*  height: 40px;*/
+/*  line-height: 40px;*/
+/*  display: flex;*/
+/*  border:1px solid red;*/
+/*  margin: 0px;*/
+/*  padding: 0px;*/
+/*}*/
+li {
+  font-size: 0.9rem;
+  text-align: center;
+  flex: 1;
+  list-style: none;
+  color: #707070;
+  border:1px solid #707070;
+  /*float: left;*/
+  margin: 0px;
+  padding: 0px;
+}
+
+
+
