@@ -27,12 +27,11 @@
       </ul>
     </div>
     <div class="container">
-<!--      <img src="https://img.xssdcdn.com/static/index/2.jpg" alt="">-->
       <a v-show="i===index" v-for="(item,i) in arr" :key="item.id" :href="item.url">
         <img :src="item.img" alt="">
       </a>
       <ul class="indexes">
-        <li v-for="(item,i) in arr" :key="item.id" :class="{active:i===index}"></li>
+        <li v-for="(item,i) in arr" :key="item.id" :class="{active:i===index}" @mouseover="mouseover_li(i)"></li>
       </ul>
     </div>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -86,7 +85,7 @@ export default {
     setInterval(() => {
       ++this.index
       if (this.index > this.arr.length - 1) this.index = 0
-    }, 4000)
+    }, 5000)
   },
   methods: {
     handleScroll () {
@@ -97,6 +96,11 @@ export default {
       } else {
         this.isFixed = false
       }
+    },
+    mouseover_li (i) {
+      clearTimeout(this.timer)
+      this.index = i
+      this.setInterval()
     }
   }
 }
