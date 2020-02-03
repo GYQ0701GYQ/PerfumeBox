@@ -1,5 +1,6 @@
 *{
   list-style: none;
+
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -133,5 +134,18 @@
 .indexes li.active{
   background: #707070;
 }
-
+.article_ul{
+  display: flex;
+  margin: 150px auto;
+  justify-content: center;
+}
+.article_img{
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.article_title{
+  padding-top: 10px;
+  color: #707070;
+  text-decoration: none;
+}
 
