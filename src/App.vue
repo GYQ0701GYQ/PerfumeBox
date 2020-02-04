@@ -35,46 +35,16 @@
       </ul>
     </div>
     <div class="article_index">
-      <ul class="article_ul">
-        <li >
-          <a href='/wenzhang/364.html' class='article_img'>
-            <img src="https://img.xssdcdn.com/article/346/0.jpg!l" alt="" width="400px" >
-          </a>
-          <div class="article_title"><a href='/wenzhang/364.html' class="article_title">12支香水环游地球: 雪山、沙漠、海洋...</a></div>
-        </li>
-        <li >
-          <a href='/wenzhang/364.html' class='article_img'>
-            <img src="https://img.xssdcdn.com/article/363/0.jpg!l" alt="" width="400px" >
-          </a>
-          <div class="article_title"><a href='/wenzhang/364.html' class="article_title">穿越时间的爱与香气: 遇见世界上另一个馥郁的自己</a></div>
-        </li>
-        <li >
-          <a href='/wenzhang/364.html' class='article_img'>
-            <img src="https://img.xssdcdn.com/article/335/0.jpg!l" alt="" width="400px" >
-          </a>
-          <div class="article_title"><a href='/wenzhang/364.html' class="article_title">2019年度香水盘点：今年哪些香水能够杀出重围？</a></div>
-        </li>
-      </ul>
-      <ul class="article_ul">
-        <li >
-          <a href='/wenzhang/364.html' class='article_img'>
-            <img src="https://img.xssdcdn.com/article/353/2.jpg!l" alt="" width="400px" >
-          </a>
-          <div class="article_title"><a href='/wenzhang/364.html' class="article_title">芦丹氏2019全系列点评</a></div>
-        </li>
-        <li >
-          <a href='/wenzhang/364.html' class='article_img'>
-            <img src="https://img.xssdcdn.com/article/359/0.jpg!l" alt="" width="400px" >
-          </a>
-          <div class="article_title"><a href='/wenzhang/364.html' class="article_title">治愈系香水TOP 10: 寻找嗅觉的“深夜食堂”</a></div>
-        </li>
-        <li >
-          <a href='/wenzhang/364.html' class='article_img'>
-            <img src="https://img.xssdcdn.com/article/358/0.jpg!l" alt="" width="400px" >
-          </a>
-          <div class="article_title"><a href='/wenzhang/364.html' class="article_title">一杯凉白开，给你温暖的家</a></div>
-        </li>
-      </ul>
+      <template v-for="img_info in article_imgs">
+        <ul :key="img_info.id" class="article_ul">
+          <li v-for="one_img_info in img_info" :key="one_img_info.id">
+                <a :href="one_img_info.url" class="article_img">
+                  <img :src="one_img_info.img" alt="" width="400px">
+                </a>
+            <div class="article_title"><a :href="one_img_info.url" class="article_title">{{one_img_info.title}}</a></div>
+          </li>
+        </ul>
+      </template>
     </div>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -124,24 +94,70 @@ export default {
       article_imgs: [
         [
           {
-            img: 'https://img.xssdcdn.com/article/334/0.jpg!l'
+            img: 'https://img.xssdcdn.com/article/346/0.jpg!l',
+            url: 'https://www.nosetime.com/wenzhang/346.html',
+            title: '12支香水环游地球: 雪山、沙漠、海洋...'
           },
           {
-            img: 'https://img.xssdcdn.com/article/333/0.jpg!l'
+            img: 'https://img.xssdcdn.com/article/363/0.jpg!l',
+            url: 'https://www.nosetime.com/wenzhang/363.html',
+            title: '穿越时间的爱与香气: 遇见世界上另一个馥郁的自己'
           },
           {
-            img: 'https://img.xssdcdn.com/article/322/0.jpg!l'
+            img: 'https://img.xssdcdn.com/article/335/0.jpg!l',
+            url: 'https://www.nosetime.com/wenzhang/362.html',
+            title: '2019年度香水盘点：今年哪些香水能够杀出重围？'
           }
         ],
         [
           {
-            img: 'https://img.xssdcdn.com/article/321/0.jpg!l'
+            img: 'https://img.xssdcdn.com/article/353/2.jpg!l',
+            url: 'https://www.nosetime.com/wenzhang/353.html',
+            title: '芦丹氏2019全系列点评'
           },
           {
-            img: 'https://img.xssdcdn.com/article/319/0.jpg!l'
+            img: 'https://img.xssdcdn.com/article/359/0.jpg!l',
+            url: 'https://www.nosetime.com/wenzhang/359.html',
+            title: '治愈系香水TOP 10: 寻找嗅觉的“深夜食堂”'
           },
           {
-            img: 'https://img.xssdcdn.com/article/330/0.jpg!l'
+            img: 'https://img.xssdcdn.com/article/358/0.jpg!l',
+            url: 'https://www.nosetime.com/wenzhang/358.html',
+            title: '一杯凉白开，给你温暖的家'
+          }
+        ],
+        [
+          {
+            img: 'https://img.xssdcdn.com/article/334/0.jpg!l',
+            url: 'https://www.nosetime.com/wenzhang/334.html',
+            title: '与调香师聊天: 以香水为工作是什么体验？'
+          },
+          {
+            img: 'https://img.xssdcdn.com/article/333/0.jpg!l',
+            url: 'https://www.nosetime.com/wenzhang/333.html',
+            title: '我们如何安全安心的穿越回60年代？'
+          },
+          {
+            img: 'https://img.xssdcdn.com/article/322/0.jpg!l',
+            url: 'https://www.nosetime.com/wenzhang/322.html',
+            title: '趁这些香水还没火，我先悄悄推荐给你'
+          }
+        ],
+        [
+          {
+            img: 'https://img.xssdcdn.com/article/321/0.jpg!l',
+            url: 'https://www.nosetime.com/wenzhang/321.html',
+            title: '香水圈里吵来吵去的“化工感”究竟是什么'
+          },
+          {
+            img: 'https://img.xssdcdn.com/article/319/0.jpg!l',
+            url: 'https://www.nosetime.com/wenzhang/319.html',
+            title: '为你奏一曲充满魔性香味交响乐'
+          },
+          {
+            img: 'https://img.xssdcdn.com/article/330/0.jpg!l',
+            url: 'https://www.nosetime.com/wenzhang/330.html',
+            title: '「日光香」：用一瓶香水把阳光穿在身上'
           }
         ]
       ]
