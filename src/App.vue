@@ -27,11 +27,11 @@
       </ul>
     </div>
     <div class="container">
-      <a v-show="i===index" v-for="(item,i) in arr" :key="item.id" :href="item.url">
+      <a v-show="i===index" v-for="(item,i) in container_img" :key="item.id" :href="item.url">
         <img :src="item.img" alt="">
       </a>
       <ul class="indexes">
-        <li v-for="(item,i) in arr" :key="item.id" :class="{active:i===index}" @mouseover="mouseover_li(i)"></li>
+        <li v-for="(item,i) in container_img" :key="item.id" :class="{active:i===index}" @mouseover="mouseover_li(i)"></li>
       </ul>
     </div>
     <div class="article_index">
@@ -46,6 +46,24 @@
         </ul>
       </template>
     </div>
+    <div class="answer_area">
+      <div class="area_level1">
+        <img src="./assets/question_808080.png" alt="" width="40px">
+        <div class="area_title"><b>常 见 问 答</b></div>
+      </div>
+      <ul class="area_level2">
+        <li class="area_level3" v-for="answer_all in question_info" :key="answer_all.id">
+          <div class="area_level4">
+            <img class="ques_right" src="./assets/right_8a8a8a.png" alt="" width="25px" v-show="!answer_all.is_collapse" @click="answer_all.is_collapse = !answer_all.is_collapse">
+            <img class="ans_bottom" src="./assets/bottom_8a8a8a.png" alt="" width="25px" v-show="answer_all.is_collapse" @click="answer_all.is_collapse = !answer_all.is_collapse">
+            <div class="question_detail" @click="answer_all.is_collapse = !answer_all.is_collapse">{{answer_all.question}}</div>
+          </div>
+          <collapse>
+            <div class="answer_detail" v-show="answer_all.is_collapse">{{answer_all.answer}}</div>
+          </collapse>
+        </li>
+      </ul>
+    </div>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <!--    <router-view/>-->
@@ -57,10 +75,12 @@
 
 <script>
 import Hello from './components/Hello'
+import collapse from './components/collapse'
 export default {
   name: 'App',
   components: {
-    Hello
+    Hello,
+    collapse
   },
   data () {
     return {
@@ -69,7 +89,7 @@ export default {
       },
       isFixed: false,
       index: 0,
-      arr: [
+      container_img: [
         {
           url: 'https://www.nosetime.com/wenzhang/230.html',
           img: 'https://img.xssdcdn.com/static/index/2.jpg'
@@ -160,6 +180,48 @@ export default {
             title: '「日光香」：用一瓶香水把阳光穿在身上'
           }
         ]
+      ],
+      question_info: [
+        {
+          is_collapse: true,
+          question: '怎样才是正确的试香方法？',
+          answer: '试香时，可以在试香纸或者手帕上喷洒香水 ，等其干了以后再闻，觉得香味是自己喜欢的，再将香水喷洒在自己手腕或者手臂内侧来体验。不要直接从香水瓶口闻香味，因为香水是由香料、酒精制成的，直接对着瓶口不但闻不到香水的原味，还会因为酒精的刺激呛到鼻子。 '
+        },
+        {
+          is_collapse: true,
+          question: '怎样正确的喷洒香水？',
+          answer: '香水的使用本身并不是什么玄学，使用者完全可以根据自己的喜好、习惯、场合需要来喷洒。比如涂抹在身体的脉搏点处或者距身体较远距离均匀喷洒。'
+        },
+        {
+          is_collapse: false,
+          question: '该如何保存香水？',
+          answer: '香水应保存在远离日照或热源的干燥凉爽处。日照是香水贮藏的第一大敌，它能分解掉香水中的香料物质。过热或者过冷也会破坏香水中各种精油的平衡，继而改变香水的味道。不带喷头的沾式香水一旦打开就尽快使用，否则会发生缓慢的挥发。如果有长时间不用的香水，可以将它们放置于保鲜盒中避光保存，这样能大幅度延长它们的寿命。'
+        },
+        {
+          is_collapse: false,
+          question: '香水的三调变化是什么意思？',
+          answer: '香水刚刚喷出来，从接触到皮肤开始，历经前调、中调和后调的演变，最终只剩下最后一点点香味的变化过程。'
+        },
+        {
+          is_collapse: false,
+          question: 'EDT, EDP, Parfum都是什么意思 ？',
+          answer: '一款香水的浓度，持久度。或者说有多大比例的酒精或水份加入了纯精油中。Parfum 浓香精是你能买到的浓度最高的香水，有15%-25%的纯精油。Eau Fraiche 清香水（通常纯香精<3%）。Eau de Cologne 古龙水（纯香精占2-5%）。Eau de Toilette 淡香水 (纯香精占4 – 10% ) 。Eau de Parfum 淡香精 (纯香精占8 – 15%) 。Parfum/Extrait 浓香精 (纯香精占15 – 25% )甚至有少数情况你会看到香水标注Parfum de Toilette一词，这代表了这款香水的浓度介于EDP与Parfum之间。'
+        },
+        {
+          is_collapse: false,
+          question: '关于香水的留香和扩散问题？',
+          answer: '一般来说，由于香水的挥发和扩散主要依靠酒精，根据酒精含量的不同，浓度越高的香水留香时间越久，但扩散会比较差。而有些低浓度的香水扩散会比较好，但留香不持久。'
+        },
+        {
+          is_collapse: false,
+          question: '金属制香水瓶应如何保存？',
+          answer: '金属盖子的香水瓶身要考虑到氧化问题，尽量避光保存，如果已经氧化，可用口红涂在氧化处，用纸巾擦掉即可。'
+        },
+        {
+          is_collapse: false,
+          question: '什么是简装?',
+          answer: '「简装香水」 即专柜供顾客试闻用的试用装，也是正品。英文叫Tester,只有简易的环保外盒，个别款的简装没有盖子。瓶身大多印有Tester字样。香水液体本身跟精装香水无差别。因为简装香水价格便宜，自用实惠，但不适合送人。「正装香水」即原装带塑封的香水(不提供礼盒和手提袋)。'
+        }
       ]
     }
   },
@@ -167,7 +229,7 @@ export default {
     window.addEventListener('scroll', this.handleScroll)
     setInterval(() => {
       ++this.index
-      if (this.index > this.arr.length - 1) this.index = 0
+      if (this.index > this.container_img.length - 1) this.index = 0
     }, 5000)
   },
   methods: {
