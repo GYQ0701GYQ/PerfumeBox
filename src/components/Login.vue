@@ -1,4 +1,5 @@
-<template>
+<template >
+  <div class="all" >
   <p class="login">
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="登录" name="first">
@@ -8,6 +9,7 @@
           <el-form-item>
             <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
             <el-button @click="resetForm('ruleForm')">重置</el-button>
+            <el-button @click="goback">返回主页</el-button>
           </el-form-item>
         </el-form>
       </el-tab-pane>
@@ -16,6 +18,7 @@
       </el-tab-pane>
     </el-tabs>
   </p>
+  </div>
 </template>
 
 <script>
@@ -44,6 +47,9 @@ export default {
       rules: {
         name: [{ required: true, message: '请输入您的名称', trigger: 'blur' }, { min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur' }],
         pass: [{ required: true, validator: validatePass, trigger: 'blur' }]
+      },
+      backgroundDiv: {
+        backgroundImage: 'url(' + require('../assets/demo1.jpg') + ')'
       }
     }
   },
@@ -69,6 +75,10 @@ export default {
           return false
         }
       })
+    },
+    // 返回上一页
+    goback () {
+      this.$router.go(-1)
     }
   },
   components: {
@@ -78,13 +88,23 @@ export default {
 </script>
 
 <style lang="scss">
-  .login {
-    width: 400px;
-    margin: 0 auto;
-  }
-
-  .el-tabsitem {
-    text-align: center;
-    width: 60px;
-  }
+.all{
+  background-size: 100% 100%;
+  height: 100%;
+  position: fixed;
+  width: 99%;
+  background-image: url("../assets/background2.png");
+  opacity: 0.85;//透明度为85%
+  filter: alpha(opacity=85);
+}
+.login {
+  height: 100%;
+  width: 500px;
+  margin: 0px auto;
+  padding-top: 200px;
+}
+.el-tabsitem {
+  text-align: center;
+  width: 60px;
+}
 </style>

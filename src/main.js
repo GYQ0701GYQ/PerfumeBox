@@ -7,7 +7,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import HelloWorld from './components/HelloWorld.vue'
 import Home from './components/Home.vue'
-import Login from './components/Login.vue'
+import LoginRegister from './components/Login.vue'
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
@@ -30,8 +30,8 @@ var router = new VueRouter({
       component: HelloWorld
     },
     {
-      path: '/Login',
-      component: Login
+      path: '/LoginRegister',
+      component: LoginRegister
     }
   ]
 })

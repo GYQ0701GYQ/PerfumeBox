@@ -6,6 +6,7 @@
     <el-form-item>
       <el-button type="primary" @click="submitForm('ruleForm')">注册</el-button>
       <el-button @click="resetForm('ruleForm')">重置</el-button>
+      <el-button @click="goback">返回主页</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -66,6 +67,10 @@ export default {
     },
     resetForm (formName) {
       this.$refs[formName].resetFields()
+    },
+    // 返回上一页
+    goback () {
+      this.$router.go(-1)
     }
   }
 }

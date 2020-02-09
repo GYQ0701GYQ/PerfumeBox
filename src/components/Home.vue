@@ -243,7 +243,7 @@ export default {
     },
     goto_Login () {
       // alert('Hi')
-      this.$router.push({path: '/Login'})
+      this.$router.push({path: '/LoginRegister'})
     },
     goto_HelloWorld () {
       this.$router.push({path: '/HelloWorld'})
