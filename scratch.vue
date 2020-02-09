@@ -1,5 +1,6 @@
 <template>
   <div class="overall">
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <div
       class="card-wrap"
       @mousemove="handleMouseMove"
@@ -8,7 +9,7 @@
       ref="card"
     >
       <div class="card" :style="cardStyle">
-        <img class="card-bg" src="@/assets/img/bck2.jpg" :style="cardBgTransform" alt />
+        <img class="card-bg" src="@/assets/demo1.jpg" :style="cardBgTransform" alt />
       </div>
     </div>
   </div>
@@ -95,6 +96,7 @@ export default {
     perspective: 1000px;
     transition: 1s cubic-bezier(0.23, 1, 0.32, 1);
     opacity: 0.8;
+    margin: auto auto;// 有修改
   }
   .card-bg {
     transform-style: preserve-3d;

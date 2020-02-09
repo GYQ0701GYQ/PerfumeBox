@@ -1,6 +1,6 @@
 *{
   list-style: none;
-
+  /*background-color:#EFFBFE;*/
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -10,7 +10,9 @@
   color: #2c3e50;
   background-color:#EFFBFE;
   /*#DFF7FD*/
-  margin-top: 0px;
+  /*margin-top: 0px;*/
+  margin: 0px;
+  padding: 0px;
 }
 #banner{
   height: 260px;
@@ -155,7 +157,8 @@
 }
 .answer_area{
   width: 80%;
-  margin: 150px auto;
+  margin: 150px auto 20px;
+  /*padding-bottom: 0px;*/
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   border: 1px solid #CDEDED;
