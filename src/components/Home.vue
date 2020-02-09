@@ -4,12 +4,12 @@
       <div id="banner_line1">
         <div id="xinshougroup">
           <img id="xinshou_logo" class="sameline" src="../assets/xinshou.png" alt="新手提示" height="30px">
-          <table class="sameline">新手入门</table>
+          <table class="sameline" @click="goto_HelloWorld">新手入门</table>
         </div>
         <img id="perfumebox_logo" src="../assets/perfumebox-logo-18.png" alt="logo图片" width="160px" >
         <div id="logingroup">
-          <img id="yonghu_logo" class="sameline" src="../assets/yonghu.png" alt="个人中心" height="30px" @click="goto_login">
-          <table class="sameline" v-show="!isLogin" @click="goto_login()">登录/注册</table>
+          <img id="yonghu_logo" class="sameline" src="../assets/yonghu.png" alt="个人中心" height="30px" @click="goto_Login">
+          <table class="sameline" v-show="!isLogin" @click="goto_Login">登录/注册</table>
           <table class="sameline" v-show="isLogin">用户中心</table>
         </div>
       </div>
@@ -241,8 +241,11 @@ export default {
       this.index = i
       this.setInterval()
     },
-    goto_login () {
+    goto_Login () {
       // alert('Hi')
+      this.$router.push({path: '/Login'})
+    },
+    goto_HelloWorld () {
       this.$router.push({path: '/HelloWorld'})
     }
   }
