@@ -3,8 +3,8 @@
     <div id="banner" :style="backgroundDiv">
       <div id="banner_line1">
         <div id="xinshougroup">
-          <img id="xinshou_logo" class="sameline" src="../assets/xinshou.png" alt="新手提示" height="30px">
-          <table class="sameline" @click="goto_HelloWorld">新手入门</table>
+          <img id="xinshou_logo" class="sameline" src="../assets/xinshou.png" alt="新手提示" height="30px" @click="goto_NewMemberGuide">
+          <table class="sameline" @click="goto_NewMemberGuide">新手入门</table>
         </div>
         <img id="perfumebox_logo" src="../assets/perfumebox-logo-18.png" alt="logo图片" width="160px" >
         <div id="logingroup">
@@ -20,11 +20,12 @@
     </div>
     <div id="navigation">
       <ul :class="isFixed?'navigationFixed':'navigationUnFixed'">
-        <li class="navigation_li">首 页</li>
-        <li class="navigation_li">排 行</li>
-        <li class="navigation_li">香 调</li>
-        <li class="navigation_li">气 味</li>
-        <li class="navigation_li">调 香 师</li>
+        <li class="navigation_li" @click="goto_Home">首 页</li>
+        <li class="navigation_li" @click="goto_RankingList">排 行</li>
+        <li class="navigation_li" @click="goto_Fragrance">香 调</li>
+        <li class="navigation_li" @click="goto_Smell">气 味</li>
+        <li class="navigation_li" @click="goto_Brand">品 牌</li>
+        <li class="navigation_li" @click="goto_Flavorist">调 香 师</li>
       </ul>
     </div>
     <div class="container">
@@ -242,11 +243,29 @@ export default {
       this.setInterval()
     },
     goto_Login () {
-      // alert('Hi')
       this.$router.push({path: '/LoginRegister'})
     },
-    goto_HelloWorld () {
-      this.$router.push({path: '/HelloWorld'})
+    goto_NewMemberGuide () {
+      const guide = this.$router.resolve({path: '/NewMemberGuide'})
+      window.open(guide.href, '_blank')
+    },
+    goto_Home () {
+      this.$router.push({path: '/Home'})
+    },
+    goto_RankingList () {
+      this.$router.push({path: '/RankingList'})
+    },
+    goto_Fragrance () {
+      this.$router.push({path: '/Fragrance'})
+    },
+    goto_Smell () {
+      this.$router.push({path: '/Smell'})
+    },
+    goto_Brand () {
+      this.$router.push({path: '/Brand'})
+    },
+    goto_Flavorist () {
+      this.$router.push({path: '/Flavorist'})
     }
   }
 }

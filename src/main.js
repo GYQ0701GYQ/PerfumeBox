@@ -2,36 +2,88 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App.vue'
+// 引入插件
 import VueRouter from 'vue-router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import HelloWorld from './components/HelloWorld.vue'
+import VueWechatTitle from 'vue-wechat-title'
+// 引入工程文件
 import Home from './components/Home.vue'
+import NewMemberGuide from './components/NewMemberGuide.vue'
 import LoginRegister from './components/Login.vue'
-
+import RankingList from './components/RankingList.vue'
+import Fragrance from './components/Fragrance.vue'
+import Smell from './components/Smell.vue'
+import Brand from './components/Brand.vue'
+import Flavorist from './components/Flavorist.vue'
 Vue.config.productionTip = false
+// 使用插件
 Vue.use(VueRouter)
 Vue.use(ElementUI)
+Vue.use(VueWechatTitle)
 /* eslint-disable no-new */
 var router = new VueRouter({
   mode: 'history',
   routes: [
     {
       path: '/',
-      name: '主页面',
       redirect: '/Home'
     },
     {
       path: '/Home',
-      component: Home
+      component: Home,
+      meta: {
+        title: 'PerfumeBox香水盒子-首页'
+      }
     },
     {
-      path: '/HelloWorld',
-      component: HelloWorld
+      path: '/NewMemberGuide',
+      component: NewMemberGuide,
+      meta: {
+        title: 'PerfumeBox香水盒子-新手入门'
+      }
     },
     {
       path: '/LoginRegister',
-      component: LoginRegister
+      component: LoginRegister,
+      meta: {
+        title: 'PerfumeBox香水盒子-登录&注册'
+      }
+    },
+    {
+      path: '/RankingList',
+      component: RankingList,
+      meta: {
+        title: 'PerfumeBox香水盒子-排行榜'
+      }
+    },
+    {
+      path: '/Fragrance',
+      component: Fragrance,
+      meta: {
+        title: 'PerfumeBox香水盒子-香调'
+      }
+    },
+    {
+      path: '/Smell',
+      component: Smell,
+      meta: {
+        title: 'PerfumeBox香水盒子-气味'
+      }
+    },
+    {
+      path: '/Brand',
+      component: Brand,
+      meta: {
+        title: 'PerfumeBox香水盒子-品牌'
+      }
+    },
+    {
+      path: '/Flavorist',
+      component: Flavorist,
+      meta: {
+        title: 'PerfumeBox香水盒子-调香师'
+      }
     }
   ]
 })

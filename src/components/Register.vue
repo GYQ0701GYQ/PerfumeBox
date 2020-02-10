@@ -43,7 +43,7 @@ export default {
         checkPass: ''
       },
       rules: {
-        name: [{ required: true, message: '请输入您的名称', trigger: 'blur' }, { min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur' }],
+        name: [{ required: true, message: '请输入您的名称(2-10字符)', trigger: 'blur' }, { min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur' }],
         pass: [{ required: true, validator: validatePass, trigger: 'blur' }],
         checkPass: [{ required: true, validator: validatePass2, trigger: 'blur' }]
       }
