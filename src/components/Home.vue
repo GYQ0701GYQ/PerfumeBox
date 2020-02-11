@@ -66,6 +66,9 @@
         </li>
       </ul>
     </div>
+    <a href="../../static/ball-pool/index.html"><el-button type="primary">气泡效果测试</el-button></a>
+    <el-button @click="goto_Three" type="primary">3D效果测试</el-button>
+<!--    <iframe src="static/vue基础.html" frameborder="0" style="width: 100%;height: calc(100vh - 273px)"></iframe>-->
   </div>
 </template>
 
@@ -81,6 +84,7 @@ export default {
       backgroundDiv: {
         backgroundImage: 'url(' + require('../assets/banner3.png') + ')'
       },
+      // list: [],
       isFixed: false,
       index: 0,
       isLogin: false,
@@ -266,6 +270,9 @@ export default {
     },
     goto_Flavorist () {
       this.$router.push({path: '/Flavorist'})
+    },
+    goto_Three () {
+      this.$router.push({path: '/Three'})
     }
   }
 }

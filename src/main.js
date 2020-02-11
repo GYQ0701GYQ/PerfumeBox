@@ -16,6 +16,7 @@ import Fragrance from './components/Fragrance.vue'
 import Smell from './components/Smell.vue'
 import Brand from './components/Brand.vue'
 import Flavorist from './components/Flavorist.vue'
+import Three from './components/ThreeDimensionBox.vue'
 Vue.config.productionTip = false
 // 使用插件
 Vue.use(VueRouter)
@@ -83,6 +84,13 @@ var router = new VueRouter({
       component: Flavorist,
       meta: {
         title: 'PerfumeBox香水盒子-调香师'
+      }
+    },
+    {
+      path: '/Three',
+      component: Three,
+      meta: {
+        title: 'PerfumeBox香水盒子-3D盒子效果测试'
       }
     }
   ]
