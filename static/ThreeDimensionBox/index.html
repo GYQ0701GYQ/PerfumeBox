@@ -8,8 +8,8 @@
 <meta name="viewport" content="width=device-width" />
 <style type="text/css">
 	[v-clock]{display: none}
-	body { 
-		 background-color: #1D1D1D; 
+	body {
+		 background-color: #1D1D1D;
 		 color:#fff;
 		 overflow: hidden;
 		}
@@ -22,7 +22,7 @@
 		transform-style: preserve-3d;
 		cursor: move;
 	}
-	
+
 	.box div {
 		position: absolute;
 		left: 0;
@@ -41,24 +41,32 @@
 <body>
 	<div id="app" v-cloak>
 		<div class="picbtn">
+      <p>
+        <i>{{aaaaa}}</i>
+        <i>{{wpsData}}</i>
+      </p>
+      <p>
+        <button @click="setData">打印本地的值</button>
+        <button @click="getData">点击获取值vue的值</button>
+      </p>
 			<p>
 				选择上图
 				<input type="file" value="选择上图" accept="image/*" @change="uploadImg($event,1)">
-		
+
 				选择下图
 				<input type="file" value="选择下图" accept="image/*" @change="uploadImg($event,2)">
 			</p>
 			<p>
 				选择左图
 				<input type="file" value="选择左图" accept="image/*" @change="uploadImg($event,3)">
-	
+
 				选择右图
 				<input type="file" value="选择右图" accept="image/*" @change="uploadImg($event,4)">
 			</p>
 			<p>
 				选择前图
 				<input type="file" value="选择前图" accept="image/*" @change="uploadImg($event,5)">
-	
+
 				选择后图
 				<input type="file" value="选择后图" accept="image/*" @change="uploadImg($event,6)">
 			</p>
@@ -66,10 +74,6 @@
 		宽<input type="number" id="width" value="" v-model="size.y">
 		高<input type="number" id="height" value="" v-model="size.z">
 		</div>
-
-		
-
-
 		<div class="box" :style="{width:size.x+'px',height:size.z+'px'}">
 			<div id="top" :style="styleTop"></div>
 			<div id="bottom" :style="styleBottom"></div>
@@ -83,11 +87,9 @@
 <script src="jquery-1.11.3.min.js"></script>
 <script src="vue.min.js"></script>
 
-
-
 <script type="text/javascript">
-	let x = '400', y = '400', z = '250';
-	let vm = new Vue({
+	let x = '300', y = '300', z = '300';
+	window.vm = new Vue({
 		el:'#app',
 		data:{
 			size:{
@@ -118,7 +120,7 @@
 				transform: ``,
 				width:'',
 				height:''
-			
+
 			},
 			stylePre:{
 				backgroundImage: `url(5.png)`,
@@ -131,26 +133,26 @@
 				transform: ``,
 				width:'',
 				height:''
-	
-			}
-
+			},
+      aaaaa :'333333',
+      wpsData:''
 		},
 		computed:{
 			preZ(){
 				return Math.floor(this.size.y/2) + 'px'
-			}, 
+			},
 			backZ(){
 				return Math.floor(this.size.y/2) + 'px'
-			}, 
+			},
 			leftZ(){
 				return Math.floor(this.size.y/2) + 'px'
-			}, 
+			},
 			rightZ(){
 				return Math.floor(this.size.x - this.size.y/2) + 'px'
-			}, 
+			},
 			topZ(){
 				return Math.floor(this.size.y/2) + 'px'
-			}, 
+			},
 			bottomZ(){
 				return Math.floor(this.size.z - this.size.y/2) + 'px'
 			}
@@ -186,14 +188,14 @@
 			    var _name, _fileName, personsFile, _img;
 			    // console.log(event)
 			    _name = event.target.value;
-			
+
 			    // console.log(_name)
 			    _fileName = _name.substring(_name.lastIndexOf(".") + 1).toLowerCase();
 			    if (_fileName !== "png" && _fileName !== "jpg") {
 			        alert("上传图片格式不正确，请重新上传");
 			    } else {
 			    	let url = `url(${window.URL.createObjectURL(event.target.files[0])})`
-			    	
+
 			        switch(n)
 					{
 						case 1:
@@ -209,22 +211,39 @@
 							this.styleRight.backgroundImage = url
 							break;
 						case 5:
-						
+
 							this.stylePre.backgroundImage = url
 							break;
 						case 6:
 							this.styleBack.backgroundImage = url
 							break;
 						default:
-					  
+
 					}
 			    }
-			}
-		}
+			},
+      setData :function() {
+        console.log('HTML打印本地的值',this.aaaaa)
+      },
+      getData :function() {
+        console.log('HTML获取vue的值',this.wpsData)
+      }
+		},
+		mounted(){
+      window.addEventListener('message',function(messageEvent){
+        console.log(messageEvent.origin,messageEvent.data)
+        this.wpsData = messageEvent.data
+        console.log('HTML事件监听',this.wpsData)
+      })
+    }
 	})
-
-
+  // window.addEventListener('message',function(messageEvent){
+  //   // console.log(messageEvent.origin,messageEvent.data)
+  //   this.wpsData = messageEvent.data
+  //   console.log('HTML事件监听',this.wpsData)
+  // })
 </script>
+
 <script src="jquery-touchrotate.js"></script>
 <script type="text/javascript">
 	$('.box').touchrotate({
