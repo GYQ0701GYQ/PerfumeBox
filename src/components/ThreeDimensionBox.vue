@@ -50,6 +50,7 @@ export default {
       const obj1 = window.frames['mainIframe']// 获得对应iframe的window对象
       // console.log(data)
       obj1.vm.wpsData = data
+      // obj1.vm.aaaaa='99999'
       console.log('VUE向iframe发送数据',obj1.vm.wpsData)
     }
   }

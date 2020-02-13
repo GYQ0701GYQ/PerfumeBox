@@ -89,7 +89,7 @@
 
 <script type="text/javascript">
 	let x = '300', y = '300', z = '300';
-	window.vm = new Vue({
+	var vm = new Vue({
 		el:'#app',
 		data:{
 			size:{
@@ -231,17 +231,12 @@
 		},
 		mounted(){
       window.addEventListener('message',function(messageEvent){
-        console.log(messageEvent.origin,messageEvent.data)
-        this.wpsData = messageEvent.data
-        console.log('HTML事件监听',this.wpsData)
+        // console.log(messageEvent.origin,messageEvent.data,messageEvent.data.data)
+        vm.wpsData = messageEvent.data.data
+        console.log('HTML事件监听',vm.wpsData)
       })
     }
 	})
-  // window.addEventListener('message',function(messageEvent){
-  //   // console.log(messageEvent.origin,messageEvent.data)
-  //   this.wpsData = messageEvent.data
-  //   console.log('HTML事件监听',this.wpsData)
-  // })
 </script>
 
 <script src="jquery-touchrotate.js"></script>
