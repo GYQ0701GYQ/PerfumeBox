@@ -1,0 +1,266 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>卡片翻转</title>
+
+<style>
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 300;
+  color: #333;
+  font-family: "Nunito Sans", sans-serif;
+}
+/*设置背景色*/
+body {
+  margin: 10px;
+  padding: 0;
+  height: 100vh;
+  background-color: #F0FDFD;
+  background-attachment: fixed;
+}
+
+.content {
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 95%;
+}
+
+.heading {
+  width: 100%;
+  margin-left: 1rem;
+  font-weight: 900;
+  font-size: 1.618rem;
+  text-transform: uppercase;
+  letter-spacing: .1ch;
+  line-height: 1;
+  padding-bottom: .5em;
+  margin-bottom: 1rem;
+  position: relative;
+}
+.heading:after {
+  display: block;
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(135deg, #1a9be6, #1a57e6);
+  bottom: 0;
+}
+.name{
+  font-size: 16px;
+  font-weight: 900;
+  color: gray;
+}
+.description {
+  width: 100%;
+  font-size: 0.9rem;
+  margin-top: 0;
+  margin-left: 1.2rem;
+  margin-right: 1.2rem;
+  margin-bottom: 3rem;
+}
+/*调整卡片大小以及距离*/
+.card {
+  color: inherit;
+  cursor: pointer;
+  width: calc(16% - 0.2rem);
+  min-width: calc(16% - 0.2rem);
+  height: 340px;
+  min-height: 340px;
+  perspective: 1000px;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+@media screen and (max-width: 800px) {
+  .card {
+    width: calc(50% - 2rem);
+  }
+}
+@media screen and (max-width: 500px) {
+  .card {
+    width: 100%;
+  }
+}
+
+.front,
+.back {
+  display: flex;
+  border-radius: 6px;
+  background-position: center;
+  background-size: cover;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition: ease-in-out 600ms;
+}
+
+.front {
+  background-size: cover;
+  padding: 1.8rem;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #fff;
+  overflow: hidden;
+  font-family: Poppins, sans-serif;
+}
+/*翻转前卡片样式，透明度，线性渐变*/
+.front:before {
+  position: absolute;
+  display: block;
+  content: '';
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(0deg,darkgray,#C4F6F6);
+  opacity: .4;
+  z-index: -1;
+  border: 1.5px solid darkgray;
+}
+.card:hover .front {
+  transform: rotateY(180deg);
+}
+.card:nth-child(even):hover .front {
+  transform: rotateY(-180deg);
+}
+/*翻转后文字*/
+.back {
+  background: #fff;
+  transform: rotateY(-180deg);
+  padding: 0 1.5em;
+}
+.card:hover .back {
+  transform: rotateY(0deg);
+}
+.card:nth-child(even) .back {
+  transform: rotateY(180deg);
+}
+.card:nth-child(even):hover .back {
+  transform: rotateY(0deg);
+}
+
+.button {
+  transform: translateZ(40px);
+  cursor: pointer;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  font-weight: bold;
+  color: #fff;
+  padding: .5em 1em;
+  border-radius: 100px;
+  font: inherit;
+  background: linear-gradient(135deg, #1a9be6, #1a57e6);
+  border: none;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: 300ms ease;
+}
+.button:before {
+  transition: 300ms ease;
+  position: absolute;
+  display: block;
+  content: '';
+  transform: translateZ(-40px);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  height: calc(100% - 20px);
+  width: calc(100% - 20px);
+  border-radius: 100px;
+  left: 10px;
+  top: 16px;
+  box-shadow: 0 0 10px 10px rgba(26, 87, 230, 0.25);
+  background-color: rgba(26, 87, 230, 0.25);
+}
+.button:hover {
+  transform: translateZ(55px);
+}
+.button:hover:before {
+  transform: translateZ(-55px);
+}
+.button:active {
+  transform: translateZ(20px);
+}
+.button:active:before {
+  transform: translateZ(-20px);
+  top: 12px;
+}
+</style>
+</head>
+<body>
+
+
+<div class="content">
+  <h1 class="heading">商业香Top5</h1>
+  <p class="description"><b>什么是商业香水：</b>香奈儿、迪奥、爱马仕无疑就是我们所熟知的大众品牌了，一般来说都是香水与时装品牌的结合。喜欢大众品牌的原因可能跟讨厌它们的原因一样，他们的Logo可以拿来晒朋友圈，他们的香味经常会被闻到，好穿、实用、接受度高是它们的特点。</p><a class="card" href="#!">
+    <div class="front" style="background-image: url(https://img.xssdcdn.com/perfume/449262.jpg);">
+<!--      <p class="name">爱马仕 大地</p>-->
+    </div>
+    <div class="back">
+      <div>
+        <p>Hermes Terre d'Hermes</p>
+        <p> 品牌：爱马仕    调香师：Jean-Claude Ellena
+          属性：男香    香调：辛辣木质调 </p>
+        <button class="button">Click Here</button>
+      </div>
+    </div></a><a class="card" href="#!">
+    <div class="front" style="background-image: url(https://img.xssdcdn.com/perfume/414474.jpg);">
+<!--      <p class="name">汤姆福特 灰色香根草</p>-->
+    </div>
+    <div class="back">
+      <div>
+        <p>Consectetur adipisicing elit. Possimus, praesentium?</p>
+        <p>Provident consectetur natus voluptatem quis tenetur sed beatae eius sint.</p>
+        <button class="button">Click Here</button>
+      </div>
+    </div></a><a class="card" href="#!">
+    <div class="front" style="background-image: url(https://img.xssdcdn.com/perfume/251428.jpg);">
+<!--      <p class="name">爱马仕 尼罗河花园</p>-->
+    </div>
+    <div class="back">
+      <div>
+        <p>Consectetur adipisicing elit. Possimus, praesentium?</p>
+        <p>Provident consectetur natus voluptatem quis tenetur sed beatae eius sint.</p>
+        <button class="button">Click Here</button>
+      </div>
+    </div></a><a class="card" href="#!">
+    <div class="front" style="background-image: url(https://img.xssdcdn.com/perfume/298678.jpg);">
+<!--      <p class="name">香奈儿 可可小姐</p>-->
+    </div>
+    <div class="back">
+      <div>
+        <p>Consectetur adipisicing elit. Possimus, praesentium?</p>
+        <p>Provident consectetur natus voluptatem quis tenetur sed beatae eius sint.</p>
+        <button class="button">Click Here</button>
+      </div>
+    </div></a><a class="card" href="#!">
+    <div class="front" style="background-image: url(https://img.xssdcdn.com/perfume/102121.jpg);">
+<!--      <p class="name">宝格丽 大吉岭茶</p>-->
+    </div>
+    <div class="back">
+      <div>
+        <p>Consectetur adipisicing elit. Possimus, praesentium?</p>
+        <p>Provident consectetur natus voluptatem quis tenetur sed beatae eius sint.</p>
+        <button class="button">Click Here</button>
+      </div>
+    </div></a>
+</div>
+
+</body>
+</html>

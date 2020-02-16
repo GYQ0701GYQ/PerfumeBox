@@ -5,7 +5,7 @@
     <el-button @click="getData()">点击获取iframe数据</el-button>
     <el-button @click="setData('我是vue数据')">向iframe中发送数据</el-button>
     <i>{{demodata}}</i>
-    <iframe id="mainIframe" ref="mainIframe" name="mainIframe" src="../../static/ThreeDimensionBox/index.html" frameborder="0" style="width: 80%;height: 650px" scrolling="auto" @load="loaded" />
+    <iframe id="mainIframe" ref="mainIframe" name="mainIframe" src="../../static/ThreeDimensionBox/index.html" frameborder="0" style="width: 100%" scrolling="auto" @load="loaded" />
   </div>
 </template>
 
