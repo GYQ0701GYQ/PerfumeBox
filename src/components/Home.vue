@@ -66,7 +66,6 @@
         </li>
       </ul>
     </div>
-    <a href="../../static/ball-pool/index.html"><el-button type="primary">气泡效果测试</el-button></a>
     <el-button @click="goto_Three" type="primary">3D效果测试</el-button>
 <!--    <iframe src="static/vue基础.html" frameborder="0" style="width: 100%;height: calc(100vh - 273px)"></iframe>-->
   </div>
