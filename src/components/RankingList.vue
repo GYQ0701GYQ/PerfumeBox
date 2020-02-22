@@ -7,7 +7,8 @@
       </div>
       <img id="perfumebox_logo" src="../assets/perfumebox-logo-18.png" alt="logo图片" width="135px" >
       <div id="logingroup">
-        <img id="yonghu_logo" class="sameline" src="../assets/yonghu.png" alt="个人中心" height="27px" @click="goto_Login">
+        <img v-show="!isLogin" id="yonghu_logo" class="sameline" src="../assets/yonghu.png" alt="未登录" height="27px" @click="goto_Login">
+        <img v-show="isLogin" class="sameline" src="../assets/logined-8a8a8a.png" alt="已登录" height="27px">
         <table class="sameline" v-show="!isLogin" @click="goto_Login">登录/注册</table>
         <table class="sameline" v-show="isLogin">用户中心</table>
       </div>
