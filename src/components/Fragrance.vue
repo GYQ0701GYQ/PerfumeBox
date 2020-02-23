@@ -27,8 +27,7 @@ export default {
   name: 'Fragrance',
   data(){
     return{
-      isLogin:false,
-      activeName: 'second'
+      isLogin:false
     }
   },
   methods:{
