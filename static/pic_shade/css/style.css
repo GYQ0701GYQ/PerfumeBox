@@ -40,16 +40,16 @@ body{
 	box-shadow: 1px 1px 2px #e6e6e6;
 	overflow: hidden;
 	position: relative;
-  margin-bottom: 15px;
   /*Add*/
-  width: 300px;
-  height: 300px;
-
+  margin: 5px 5px 5px 5px;
+  width: 250px;
+  height: 250px;
+  float: left;
 }
 .box:hover{ box-shadow: 13px 13px 15px rgba(0, 0, 0, 0.3); }
 .box:before{
 	content: "";
-	background: linear-gradient(to left top,#11998e,#38ef7d);
+	background: linear-gradient(to right bottom,#C4F6F6, #1a9be6);
 	height: 100%;
 	width: 100%;
 	opacity: 0;
@@ -62,7 +62,7 @@ body{
 .box img{
 	/*width: 100%;*/
 	/*height: auto;*/
-  width: 300px;
+  width: 180px;
   height: auto;
 	transition: all 0.4s linear;
   position: absolute;
@@ -116,7 +116,7 @@ body{
 }
 .box:hover .icon li:nth-child(2){ transition: all 0.3s ease 0.2s; }
 .box .icon li a{
-	color: #11998e;
+	color: #1a9be6;
 	background: #fff;
 	font-size: 16px;
 	line-height: 33px;
@@ -128,9 +128,21 @@ body{
 }
 .box .icon li  a:hover{
 	color: #fff;
-	background-color: #11998e;
+	background-color:#1a9be6;
 	box-shadow: 0 0 5px #000;
 }
 @media only screen and (max-width:990px){
 	.box { margin: 0 0 30px; }
+}
+.clear{
+  clear:both;
+  height: 0px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.letter_title{
+  margin-left: 10px;
+  margin-top: 20px;
+  margin-bottom: 0px;
+  height: 40px;
 }

@@ -7,7 +7,8 @@
 <title>css3鼠标悬停图片内部放大和阴影特效</title>
 
 <!--响应式框架-->
-<link rel="stylesheet" type="text/css" href="css/bootstrap-grid.min.css" /><!--CSS RESET-->
+<!--<link rel="stylesheet" type="text/css" href="css/bootstrap-grid.min.css" />&lt;!&ndash;CSS RESET&ndash;&gt;-->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 <!--图标库-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -15,13 +16,25 @@
 <!--核心样式-->
 <link rel="stylesheet" type="text/css" href="css/style.css">
 
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
 </head>
 <body>
 
-<div class="demo">
+<div class="demo" id="demo">
+  <div class="choose_type">
+    <el-radio v-model="choosed_type" label="1">备选项</el-radio>
+    <el-radio v-model="choosed_type" label="2">备选项</el-radio>
+  </div>
+  <div>{{choosed_type}}</div>
 	<div class="container">
-		<div class="row">
-			<div class="col-md-4 col-sm-6">
+		<div class="group">
+      <div class="clear" ></div>
+<!--      <div class="letter_title"><h1>{{one_letter}}</h1></div>-->
+			<div class="col-md-2 col-sm-6">
 				<div class="box">
 					<img  src="https://img.xssdcdn.com/brand/49142.jpg">
 					<div class="box-content">
@@ -34,7 +47,7 @@
 					</ul>
 				</div>
 			</div>
-			<div class="col-md-4 col-sm-6">
+			<div class="col-md-2 col-sm-6">
 				<div class="box">
 					<img  src="images/img-2.jpg">
 					<div class="box-content">
@@ -47,7 +60,7 @@
 					</ul>
 				</div>
 			</div>
-			<div class="col-md-4 col-sm-6">
+			<div class="col-md-2 col-sm-6">
 				<div class="box">
 					<img  src="images/img-3.jpg">
 					<div class="box-content">
@@ -60,7 +73,7 @@
 					</ul>
 				</div>
 			</div>
-      <div class="col-md-4 col-sm-6">
+      <div class="col-md-2 col-sm-6">
         <div class="box">
           <img  src="images/img-3.jpg">
           <div class="box-content">
@@ -73,7 +86,7 @@
           </ul>
         </div>
       </div>
-      <div class="col-md-4 col-sm-6">
+      <div class="col-md-2 col-sm-6">
         <div class="box">
           <img  src="images/img-3.jpg">
           <div class="box-content">
@@ -86,7 +99,7 @@
           </ul>
         </div>
       </div>
-      <div class="col-md-4 col-sm-6">
+      <div class="col-md-2 col-sm-6">
         <div class="box">
           <img  src="images/img-3.jpg">
           <div class="box-content">
@@ -99,7 +112,7 @@
           </ul>
         </div>
       </div>
-      <div class="col-md-4 col-sm-6">
+      <div class="col-md-2 col-sm-6">
         <div class="box">
           <img  src="images/img-3.jpg">
           <div class="box-content">
@@ -116,5 +129,15 @@
 	</div>
 </div>
 
+<script>
+<!--创建VUE实例-->
+var demo=new Vue({
+  el:'#demo',
+  data:{
+    choosed_type:'1',
+    letters:['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+  }
+})
+</script>
 </body>
 </html>

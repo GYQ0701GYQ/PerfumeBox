@@ -14,7 +14,7 @@
       </div>
     </div>
     <h1 class="heading">品牌入门</h1>
-    <iframe class="fragrance-frame" ref="mainIframe" src="../../static/pic_shade/index.html" frameborder="no" scrolling="no" width="90%" height="550px" @load="loaded" />
+    <iframe class="fragrance-frame" ref="mainIframe" src="../../static/pic_shade/index.html" frameborder="no" scrolling="no" width="90%" height="1000px" @load="loaded" />
   </div>
 </template>
 
