@@ -146,3 +146,9 @@ body{
   margin-bottom: 0px;
   height: 40px;
 }
+.choose_type{
+  border:1px dashed #DFF7FD;
+  margin-left: 30px;
+  margin-right: 30px;
+  padding: 5px 10px 5px 10px;
+}

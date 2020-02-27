@@ -26,20 +26,44 @@
 
 <div class="demo" id="demo">
   <div class="choose_type">
-    <el-radio v-model="choosed_type" label="1">备选项</el-radio>
-    <el-radio v-model="choosed_type" label="2">备选项</el-radio>
+    <el-radio v-model="choosed_type" label=0>A</el-radio>
+    <el-radio v-model="choosed_type" label=1>B</el-radio>
+    <el-radio v-model="choosed_type" label=2>C</el-radio>
+    <el-radio v-model="choosed_type" label=3>D</el-radio>
+    <el-radio v-model="choosed_type" label=4>E</el-radio>
+    <el-radio v-model="choosed_type" label=5>F</el-radio>
+    <el-radio v-model="choosed_type" label=6>G</el-radio>
+    <el-radio v-model="choosed_type" label=7>H</el-radio>
+    <el-radio v-model="choosed_type" label=8>I</el-radio>
+    <el-radio v-model="choosed_type" label=9>J</el-radio>
+    <el-radio v-model="choosed_type" label=10>K</el-radio>
+    <el-radio v-model="choosed_type" label=11>L</el-radio>
+    <el-radio v-model="choosed_type" label=12>M</el-radio>
+    <el-radio v-model="choosed_type" label=13>N</el-radio>
+    <el-radio v-model="choosed_type" label=14>O</el-radio>
+    <el-radio v-model="choosed_type" label=15>P</el-radio>
+    <el-radio v-model="choosed_type" label=16>Q</el-radio>
+    <el-radio v-model="choosed_type" label=17>R</el-radio>
+    <el-radio v-model="choosed_type" label=18>S</el-radio>
+    <el-radio v-model="choosed_type" label=19>T</el-radio>
+    <el-radio v-model="choosed_type" label=20>U</el-radio>
+    <el-radio v-model="choosed_type" label=21>V</el-radio>
+    <el-radio v-model="choosed_type" label=22>W</el-radio>
+    <el-radio v-model="choosed_type" label=23>X</el-radio>
+    <el-radio v-model="choosed_type" label=24>Y</el-radio>
+    <el-radio v-model="choosed_type" label=25>Z</el-radio>
   </div>
-  <div>{{choosed_type}}</div>
+<!--  <div>{{letters[choosed_type]}}</div>-->
 	<div class="container">
 		<div class="group">
       <div class="clear" ></div>
-<!--      <div class="letter_title"><h1>{{one_letter}}</h1></div>-->
-			<div class="col-md-2 col-sm-6">
+      <div class="letter_title"><h1>{{letters[choosed_type]}}</h1></div>
+			<div class="unknow" v-for="brands in brand_info[choosed_type]">
 				<div class="box">
-					<img  src="https://img.xssdcdn.com/brand/49142.jpg">
+					<img :src="brands.logo_src">
 					<div class="box-content">
-						<h3 class="title">Williamson</h3>
-						<span class="post">Web designer</span>
+						<h3 class="title">{{brands.eng_name}}</h3>
+						<span class="post">{{brands.ch_name}}</span>
 					</div>
 					<ul class="icon">
 						<li><a href="#"><i class="fa fa-search"></i></a></li>
@@ -47,84 +71,6 @@
 					</ul>
 				</div>
 			</div>
-			<div class="col-md-2 col-sm-6">
-				<div class="box">
-					<img  src="images/img-2.jpg">
-					<div class="box-content">
-						<h3 class="title">Miranda Roy</h3>
-						<span class="post">Web developer</span>
-					</div>
-					<ul class="icon">
-						<li><a href="#"><i class="fa fa-search"></i></a></li>
-						<li><a href="#"><i class="fa fa-link"></i></a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="col-md-2 col-sm-6">
-				<div class="box">
-					<img  src="images/img-3.jpg">
-					<div class="box-content">
-						<h3 class="title">Steve Thomas</h3>
-						<span class="post">Web developer</span>
-					</div>
-					<ul class="icon">
-						<li><a href="#"><i class="fa fa-search"></i></a></li>
-						<li><a href="#"><i class="fa fa-link"></i></a></li>
-					</ul>
-				</div>
-			</div>
-      <div class="col-md-2 col-sm-6">
-        <div class="box">
-          <img  src="images/img-3.jpg">
-          <div class="box-content">
-            <h3 class="title">Steve Thomas</h3>
-            <span class="post">Web developer</span>
-          </div>
-          <ul class="icon">
-            <li><a href="#"><i class="fa fa-search"></i></a></li>
-            <li><a href="#"><i class="fa fa-link"></i></a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-md-2 col-sm-6">
-        <div class="box">
-          <img  src="images/img-3.jpg">
-          <div class="box-content">
-            <h3 class="title">Steve Thomas</h3>
-            <span class="post">Web developer</span>
-          </div>
-          <ul class="icon">
-            <li><a href="#"><i class="fa fa-search"></i></a></li>
-            <li><a href="#"><i class="fa fa-link"></i></a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-md-2 col-sm-6">
-        <div class="box">
-          <img  src="images/img-3.jpg">
-          <div class="box-content">
-            <h3 class="title">Steve Thomas</h3>
-            <span class="post">Web developer</span>
-          </div>
-          <ul class="icon">
-            <li><a href="#"><i class="fa fa-search"></i></a></li>
-            <li><a href="#"><i class="fa fa-link"></i></a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-md-2 col-sm-6">
-        <div class="box">
-          <img  src="images/img-3.jpg">
-          <div class="box-content">
-            <h3 class="title">Steve Thomas</h3>
-            <span class="post">Web developer</span>
-          </div>
-          <ul class="icon">
-            <li><a href="#"><i class="fa fa-search"></i></a></li>
-            <li><a href="#"><i class="fa fa-link"></i></a></li>
-          </ul>
-        </div>
-      </div>
 		</div>
 	</div>
 </div>
@@ -134,8 +80,37 @@
 var demo=new Vue({
   el:'#demo',
   data:{
-    choosed_type:'1',
-    letters:['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+    choosed_type:'0',
+    letters:['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'],
+    brand_info:[
+      [
+        {
+          logo_src:'https://img.xssdcdn.com/brand/91761.jpg',
+          eng_name:'Atelier Cologne',
+          ch_name:'欧珑'
+        },
+        {
+          logo_src: 'https://img.xssdcdn.com/brand/20871.jpg',
+          eng_name: 'Amouage',
+          ch_name: '爱慕'
+        },
+        {
+          logo_src: 'https://img.xssdcdn.com/brand/51198.jpg',
+          eng_name: 'Acqua di Parma',
+          ch_name: '帕尔玛之水'
+        },
+        {
+          logo_src: 'https://img.xssdcdn.com/brand/35498.jpg',
+          eng_name: 'Anna Sui',
+          ch_name: '安娜苏'
+        },
+        {
+          logo_src: 'https://img.xssdcdn.com/brand/33391.jpg',
+          eng_name: 'Acca Kappa',
+          ch_name: '艾克卡帕'
+        }
+      ]
+    ]
   }
 })
 </script>
