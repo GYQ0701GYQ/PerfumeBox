@@ -26,7 +26,7 @@
         <li class="navigation_li" @click="goto_Fragrance">香 调</li>
 <!--        <li class="navigation_li" @click="goto_Smell">气 味</li>-->
         <li class="navigation_li" @click="goto_Brand">品 牌</li>
-<!--        <li class="navigation_li" @click="goto_Flavorist">调 香 师</li>-->
+        <li class="navigation_li" @click="goto_Flavorist">调 香 师</li>
       </ul>
     </div>
     <div class="container">
