@@ -15,7 +15,7 @@
     </div>
     <iframe ref="mainIframe" src="../../static/card-flip/demo.html" frameborder="0" scrolling="no" width="100%" height="510px" @load="loaded" />
     <div class="link">
-      <el-link class="top200href"> > 点击查看商业香Top200</el-link>
+      <router-link  :to="{path:'/Flavorist'}"><el-link class="top200href" > > 点击查看商业香Top200</el-link></router-link>
       <div class="clear"></div>
     </div>
     <iframe ref="mainIframe" src="../../static/card-flip/demo.2.html" frameborder="0" scrolling="no" width="100%" height="510px" @load="loaded" />
@@ -31,8 +31,33 @@ export default {
   name: 'RankingList',
   data(){
     return{
-      isLogin:false
+      isLogin:false,
+      linkdata:''
     }
+  },
+  watch:{
+    linkdata: {
+      handler: function (linkdata) {
+        switch (linkdata) {
+          case '大地':
+            this.goto_Detail();
+            break;
+          default:
+            console.log(linkdata);
+            break;
+        }
+      },
+      immediate: true
+    }
+  },
+  mounted () {
+    // 得到子页面传来的值，在子页面向父页面发送数据时会监听到
+    var that=this
+    window.addEventListener('message',function(e){
+      console.log("VUE监听到的子页面值", e.data.data)
+      that.linkdata=e.data.data
+      console.log('改后的demodata',that.linkdata)
+    },false);
   },
   methods:{
     goto_Login () {
@@ -40,6 +65,9 @@ export default {
     },
     goto_Home () {
       this.$router.push({path: '/Home'})
+    },
+    goto_Detail(){
+      this.$router.push({path:'/PerfumeDetail'})
     }
   }
 }

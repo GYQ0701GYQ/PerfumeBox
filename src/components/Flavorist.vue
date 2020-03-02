@@ -13,9 +13,9 @@
         <table class="sameline" v-show="isLogin">用户中心</table>
       </div>
     </div>
-    <h1 class="heading">商业香品牌入门</h1>
+    <h1 class="heading">排行榜top200测试页面</h1>
     <div class="ranking">
-      <el-card v-for="topinf in toplist" class="topcard">
+      <el-card v-for="topinf in toplist" class="topcard" :key="topinf.id">
         <img :src="topinf.img" class="image">
         <div style="padding: 14px;">
           <span>{{'Top'+topinf.id}}</span>

@@ -17,6 +17,8 @@ import Smell from './components/Smell.vue'
 import Brand from './components/Brand.vue'
 import Flavorist from './components/Flavorist.vue'
 import Three from './components/ThreeDimensionBox.vue'
+import Collect from './components/Collect.vue'
+import PerfumeDetail from './components/PerfumeDetail.vue'
 Vue.config.productionTip = false
 // 使用插件
 Vue.use(VueRouter)
@@ -91,6 +93,20 @@ var router = new VueRouter({
       component: Three,
       meta: {
         title: 'PerfumeBox香水盒子-3D盒子效果测试'
+      }
+    },
+    {
+      path: '/Collect',
+      component: Collect,
+      meta: {
+        title: 'PerfumeBox用户中心-收藏夹'
+      }
+    },
+    {
+      path: '/PerfumeDetail',
+      component: PerfumeDetail,
+      meta: {
+        title: 'PerfumeBox香水盒子-商品详情'
       }
     }
   ]

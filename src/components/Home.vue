@@ -11,7 +11,16 @@
           <img v-show="!isLogin" id="yonghu_logo" class="sameline" src="../assets/yonghu.png" alt="个人中心" height="30px" @click="goto_Login">
           <img v-show="isLogin" class="sameline" src="../assets/logined-8a8a8a.png" alt="已登录" height="27px">
           <table class="sameline" v-show="!isLogin" @click="goto_Login">登录/注册</table>
-          <table class="sameline" v-show="isLogin">用户中心</table>
+          <table class="sameline" v-show="isLogin">
+            <el-dropdown @command="handleCommand">
+              <span class="el-dropdown-link">用户中心</span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item icon="el-icon-goods" command="a">购物车</el-dropdown-item>
+                <el-dropdown-item icon="el-icon-star-off" command="b">收藏夹</el-dropdown-item>
+                <el-dropdown-item icon="el-icon-user-solid" command="c" devided>退出登录</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </table>
         </div>
       </div>
       <div id="searchgroup" >
@@ -87,7 +96,7 @@ export default {
       // list: [],
       isFixed: false,
       index: 0,
-      isLogin: false,
+      isLogin: true,
       container_img: [
         {
           url: 'https://www.nosetime.com/wenzhang/230.html',
@@ -273,6 +282,39 @@ export default {
     },
     goto_Three () {
       this.$router.push({path: '/Three'})
+    },
+    logout () {
+      this.$confirm('是否确定退出登录?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.isLogin=false
+        this.$message({
+          type: 'success',
+          message: '成功退出登录!'
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消操作'
+        });
+      });
+    },
+    handleCommand(command) {
+      switch (command) {
+        case 'a':
+          this.$router.push({path: '/Collect'});
+          break;
+        case 'b':
+          this.$router.push({path: '/Collect'});
+          break;
+        case 'c':
+          this.logout();
+          break;
+        default:
+          break;
+      }
     }
   }
 }
