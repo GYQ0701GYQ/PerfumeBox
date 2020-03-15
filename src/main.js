@@ -26,7 +26,6 @@ Vue.use(ElementUI)
 Vue.use(VueWechatTitle)
 /* eslint-disable no-new */
 var router = new VueRouter({
-  mode: 'history',
   routes: [
     {
       path: '/',
