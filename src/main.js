@@ -7,6 +7,7 @@ import VueRouter from 'vue-router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import VueWechatTitle from 'vue-wechat-title'
+import VueResource from 'vue-resource'
 // 引入工程文件
 import Home from './components/Home.vue'
 import NewMemberGuide from './components/NewMemberGuide.vue'
@@ -24,6 +25,7 @@ Vue.config.productionTip = false
 Vue.use(VueRouter)
 Vue.use(ElementUI)
 Vue.use(VueWechatTitle)
+Vue.use(VueResource)
 /* eslint-disable no-new */
 var router = new VueRouter({
   routes: [

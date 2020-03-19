@@ -77,6 +77,23 @@
       </ul>
     </div>
     <el-button @click="goto_Three" type="primary">3D效果测试</el-button>
+    <el-row display="margin-top:10px">
+      <el-input v-model="input" placeholder="请输入书名" style="display:inline-table; width: 30%; float:left"></el-input>
+      <el-button type="primary" @click="addBook()" style="float:left; margin: 2px;">新增</el-button>
+    </el-row>
+    <el-row>
+      <el-table :data="bookList" style="width: 100%" border>
+        <el-table-column prop="id" label="编号" min-width="100">
+          <template slot-scope="scope"> {{ scope.row.name }} </template>
+        </el-table-column>
+        <el-table-column prop="book_name" label="书名" min-width="100">
+          <template slot-scope="scope"> {{ scope.row.fields.born}} </template>
+        </el-table-column>
+<!--        <el-table-column prop="add_time" label="添加时间" min-width="100">-->
+<!--          <template slot-scope="scope"> {{ scope.row.fields.add_time }} </template>-->
+<!--        </el-table-column>-->
+      </el-table>
+    </el-row>
 <!--    <iframe src="static/vue基础.html" frameborder="0" style="width: 100%;height: calc(100vh - 273px)"></iframe>-->
   </div>
 </template>
@@ -230,7 +247,9 @@ export default {
           question: '什么是简装?',
           answer: '「简装香水」 即专柜供顾客试闻用的试用装，也是正品。英文叫Tester,只有简易的环保外盒，个别款的简装没有盖子。瓶身大多印有Tester字样。香水液体本身跟精装香水无差别。因为简装香水价格便宜，自用实惠，但不适合送人。「正装香水」即原装带塑封的香水(不提供礼盒和手提袋)。'
         }
-      ]
+      ],
+      input: '',
+      bookList: []
     }
   },
   mounted () {
@@ -239,6 +258,7 @@ export default {
       ++this.index
       if (this.index > this.container_img.length - 1) this.index = 0
     }, 5000)
+    this.showBooks()
   },
   methods: {
     handleScroll () {
@@ -315,6 +335,35 @@ export default {
         default:
           break;
       }
+    },
+    addBook () {
+      this.$http.get('http://127.0.0.1:8000/api/add_book?book_name=' + this.input)
+        .then((response) => {
+          //console.log(response)
+          var res = JSON.parse(response.bodyText)
+          console.log(res)
+          if (res.error_num === 0) {
+            this.showBooks()
+          } else {
+            this.$message.error('新增书籍失败，请重试')
+            console.log(res['msg'])
+          }
+        })
+    },
+    showBooks () {
+      this.$http.get('http://127.0.0.1:8000/api/show_books')
+        .then((response) => {
+          console.log(response)
+          var res = JSON.parse(response.bodyText)
+          console.log(res)
+          if (res.error_num === 0) {
+            this.bookList = res['list']
+            console.log(this.bookList)
+          } else {
+            this.$message.error('查询书籍失败')
+            console.log(res['msg'])
+          }
+        })
     }
   }
 }
