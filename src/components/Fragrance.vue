@@ -14,7 +14,7 @@
       </div>
     </div>
     <h1 class="heading">香调入门</h1>
-    <iframe class="fragrance-frame" ref="mainIframe" src="../../static/fullpage-transitions-3/index.html" frameborder="no" scrolling="no" width="80%" height="550px" @load="loaded" />
+    <iframe class="fragrance-frame" ref="mainIframe" src="../../static/fullpage-transitions-3/index.html" frameborder="no" scrolling="no" width="80%" height="550px"/>
 <!--    <h1 class="heading">代表作品</h1>-->
 <!--    <div class="box">-->
 <!--      编写代表作品展示-->

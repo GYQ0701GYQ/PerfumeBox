@@ -22,12 +22,12 @@
         </table>
       </div>
     </div>
-    <iframe ref="mainIframe" src="../../static/card-flip/demo.html" frameborder="0" scrolling="no" width="100%" height="510px" @load="loaded" />
+    <iframe ref="mainIframe" src="../../static/card-flip/demo.html" frameborder="0" scrolling="no" width="100%" height="510px"/>
     <div class="link">
       <router-link  :to="{path:'/Flavorist'}"><el-link class="top200href" > > 点击查看商业香Top200</el-link></router-link>
       <div class="clear"></div>
     </div>
-    <iframe ref="mainIframe" src="../../static/card-flip/demo.2.html" frameborder="0" scrolling="no" width="100%" height="510px" @load="loaded" />
+    <iframe ref="mainIframe" src="../../static/card-flip/demo.2.html" frameborder="0" scrolling="no" width="100%" height="510px"/>
     <div class="link">
       <el-link class="top200href"> > 点击查看沙龙香Top200</el-link>
       <div class="clear"></div>

@@ -15,7 +15,7 @@
     </div>
     <h1 class="heading">排行榜top200测试页面</h1>
     <div class="ranking">
-      <el-card v-for="topinf in toplist" class="topcard" :key="topinf.id">
+      <el-card v-for="topinf in toplist" class="topcard" :key="topinf.index">
         <img :src="topinf.img" class="image">
         <div style="padding: 14px;">
           <span>{{'Top'+topinf.id}}</span>

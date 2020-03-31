@@ -14,9 +14,9 @@
       </div>
     </div>
     <h1 class="heading">商业香品牌入门</h1>
-    <iframe class="fragrance-frame" ref="mainIframe" src="../../static/pic_shade/index.html" frameborder="no" scrolling="auto" width="90%" height="670px" @load="loaded"></iframe>
+    <iframe class="fragrance-frame" ref="mainIframe" src="../../static/pic_shade/index.html" frameborder="no" scrolling="auto" width="90%" height="670px"></iframe>
     <h1 class="heading">沙龙香品牌入门</h1>
-    <iframe class="fragrance-frame" ref="mainIframe" src="../../static/pic_shade/index.html" frameborder="no" scrolling="auto" width="90%" height="670px" @load="loaded"></iframe>
+    <iframe class="fragrance-frame" ref="mainIframe" src="../../static/pic_shade/index.html" frameborder="no" scrolling="auto" width="90%" height="670px"></iframe>
   </div>
 </template>
 
