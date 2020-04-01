@@ -104,7 +104,8 @@ var router = new VueRouter({
       }
     },
     {
-      path: '/PerfumeDetail',
+      path: '/PerfumeDetail/:search_name',
+      name:'PerfumeDetail',
       component: PerfumeDetail,
       meta: {
         title: 'PerfumeBox香水盒子-商品详情'

@@ -46,32 +46,13 @@
   display: inline;
 }
 #searchgroup{
-  width: 380px;
+  width: 800px;
   margin:auto;
   font-family: 'Microsoft YaHei';
   font-size: 14px;
 }
-#search{
-  width: 260px;
-  border: 1px solid #e2e2e2;
-  height: 30px;
-  float: left;
-  background-image: url(../assets/search.png);
-  background-repeat: no-repeat;
-  background-size: 25px;
-  background-position:5px center;
-  padding:0 0 0 40px;
-}
-#searchbtn{
-  width: 78px;
-  height: 32px;
-  float: right;
-  background: darkgray;
-  color: white;
-  text-align: center;
-  line-height: 32px;
-  cursor: pointer;
-  font-family: 'Microsoft YaHei';
+.input-with-select .el-input-group__prepend {
+  background-color: #fff;
 }
 .navigationFixed{
   position:fixed;
