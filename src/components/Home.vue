@@ -262,6 +262,9 @@ export default {
     }, 5000)
     this.showBooks()
   },
+  destroyed () {
+    window.removeEventListener('scroll', this.handleScroll, false)
+  },
   methods: {
     handleScroll () {
       var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop

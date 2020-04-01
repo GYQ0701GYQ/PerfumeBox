@@ -61,14 +61,17 @@ export default {
   },
   mounted () {
     // 得到子页面传来的值，在子页面向父页面发送数据时会监听到
-    var that=this
-    window.addEventListener('message',function(e){
-      console.log("VUE监听到的子页面值", e.data.data)
-      that.linkdata=e.data.data
-      console.log('改后的demodata',that.linkdata)
-    },false);
+    window.addEventListener('message',this.handle_listen,false);
+  },
+  beforeDestroy () {
+    window.removeEventListener('message',this.handle_listen,false)
   },
   methods:{
+    handle_listen (e){
+        console.log("VUE监听到的子页面值", e.data.data)
+        this.linkdata=e.data.data
+        console.log('改后的demodata',this.linkdata)
+    },
     goto_Login () {
       this.$router.push({path: '/LoginRegister'})
     },
@@ -78,11 +81,6 @@ export default {
     goto_Detail(){
       this.$router.push({path:'/PerfumeDetail'})
     },
-    test(){
-      // this.$message('Test消息')
-      this.isLogin=false
-      console.log('触发函数')
-    },
     logout () {
       var vm=this
       this.$confirm('是否确定退出登录?', '提示', {
@@ -91,13 +89,11 @@ export default {
         type: 'warning'
       }).then(() => {
         this.isLogin=false;
-        console.log('test')
         this.$message({
           type: 'success',
           message: '成功退出登录!'
         });
       }).catch(() => {
-        // debugger
         this.$message({
           type: 'info',
           message: '已取消操作'
