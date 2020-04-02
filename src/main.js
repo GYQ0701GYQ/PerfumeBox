@@ -8,6 +8,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import VueWechatTitle from 'vue-wechat-title'
 import VueResource from 'vue-resource'
+import Api from'./api/index.js'
 // 引入工程文件
 import Home from './components/Home.vue'
 import NewMemberGuide from './components/NewMemberGuide.vue'
@@ -26,6 +27,7 @@ Vue.use(VueRouter)
 Vue.use(ElementUI)
 Vue.use(VueWechatTitle)
 Vue.use(VueResource)
+Vue.prototype.$api = Api
 /* eslint-disable no-new */
 var router = new VueRouter({
   routes: [

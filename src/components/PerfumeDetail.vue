@@ -1,7 +1,13 @@
 <template>
     <div>
       <h3>{{'搜索内容为：'+this.$route.params.search_name}}</h3>
-      <div>{{this.perfume_info}}</div>
+      <h4>搜索结果如下</h4>
+      <div v-for="each_perfume in perfume_info2" :key="each_perfume.index">
+        <div v-for="each_tag in each_perfume" :key="each_tag.index">
+          {{each_tag}}
+        </div>
+      </div>
+<!--      <div>{{this.perfume_info2}}</div>-->
     </div>
 </template>
 
@@ -10,7 +16,8 @@
     name: 'PerfumeDetail',
     data(){
       return{
-        perfume_info:''
+        perfume_info1:[],
+        perfume_info2:[]
       }
     },
     created () {
@@ -19,26 +26,42 @@
     },
     methods:{
       search_perfume(search_name){
-        this.$http({
-          url:'http://127.0.0.1:8000/api/search_perfume',
-          method:'GET',
-          data:{
-            search_info:String(search_name),
-            search_info2 :333
-          },
-          headers:{
-            'content-Type':'x-www-form-urlencoded; charset=UTF-8'
-          }
-        }).then((response) => {
+        this.$api.get('/url/api/search_perfume', {
+          search_info: search_name
+        }, response => {
+          if (response.status >= 200 && response.status < 300) {
             console.log(response)
-            var res = JSON.parse(response.bodyText)
-            console.log(res)
-            if (res.error_num === 0) {
-              this.$message.success('调用成功')
-            } else {
-              this.$message.error('调用失败')
-            }
-          })
+            console.log(response.status)
+            console.log(response.data)
+            console.log(response.data['list1'])
+            console.log(response.data['list2'])
+            this.perfume_info1 = response.data['list1']
+            this.perfume_info2 = response.data['list2']
+            console.log('调用成功');//请求成功，response为成功信息参数
+          } else {
+            console.log(response);//请求失败，response为失败信息
+          }
+        });
+        // this.$http({
+        //   url:'http://127.0.0.1:8000/api/search_perfume',
+        //   method:'GET',
+        //   data:{
+        //     search_info:String(search_name),
+        //     search_info2 :333
+        //   },
+        //   headers:{
+        //     'content-Type':'x-www-form-urlencoded; charset=UTF-8'
+        //   }
+        // }).then((response) => {
+        //     console.log(response)
+        //     var res = JSON.parse(response.bodyText)
+        //     console.log(res)
+        //     if (res.error_num === 0) {
+        //       this.$message.success('调用成功')
+        //     } else {
+        //       this.$message.error('调用失败')
+        //     }
+        //   })
       },
       test_show_perfume(){
         this.$http.get('http://127.0.0.1:8000/api/show_perfume')
