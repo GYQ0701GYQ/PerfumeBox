@@ -30,14 +30,9 @@
           search_info: search_name
         }, response => {
           if (response.status >= 200 && response.status < 300) {
-            console.log(response)
-            console.log(response.status)
-            console.log(response.data)
-            console.log(response.data['list1'])
-            console.log(response.data['list2'])
             this.perfume_info1 = response.data['list1']
             this.perfume_info2 = response.data['list2']
-            console.log('调用成功');//请求成功，response为成功信息参数
+            console.log('调用搜索成功');//请求成功，response为成功信息参数
           } else {
             console.log(response);//请求失败，response为失败信息
           }
