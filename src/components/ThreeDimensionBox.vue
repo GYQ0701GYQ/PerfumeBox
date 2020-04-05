@@ -51,8 +51,6 @@
       loaded() {
         const vm = this.$refs.mainIframe.contentWindow.vm
         console.log('VUE页面加载',vm)
-        // console.log(this.$refs.mainIframe.contentWindow)
-        // vm.func1()
       },
       getData() {
         const obj1 = window.frames['mainIframe']// 获得对应iframe的window对象

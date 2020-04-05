@@ -1,10 +1,11 @@
 <template>
     <div>
-      <h3>{{'搜索内容为：'+this.$route.params.search_name}}</h3>
+      <h3>{{'搜索内容为：'+this.$route.params.perfume_name}}</h3>
       <h4>搜索结果如下</h4>
-      <div v-for="each_perfume in perfume_info2" :key="each_perfume.index">
-        <div v-for="each_tag in each_perfume" :key="each_tag.index">
-          {{each_tag}}
+      <div v-for="(each_perfume,index1) in perfume_info2" :key="each_perfume.index">
+        <div v-for="(each_tag,index2) in each_perfume" :key="each_tag.index">
+          <div v-show="each_tag!=='#'"><b>{{perfume_info1[index2]+': '}}</b>{{each_tag}}</div>
+          <br v-show="each_tag!=='#'">
         </div>
       </div>
 <!--      <div>{{this.perfume_info2}}</div>-->
@@ -16,22 +17,21 @@
     name: 'PerfumeDetail',
     data(){
       return{
-        perfume_info1:[],
+        perfume_info1:['标签：','发布时间：','名称：','图片：','香调：','属性：','简介：','品牌：','中调：','前调：','调香师：','后调：'],
         perfume_info2:[]
       }
     },
     created () {
-      this.search_perfume(this.$route.params.search_name)  //向后端传递搜索框的字符串，按字符串检索
+      this.search_one_perfume(this.$route.params.perfume_name)  //向后端传递搜索框的字符串，按字符串检索
       // this.test_show_perfume()  //不向后端传递参数的情况下直接get数据
     },
     methods:{
-      search_perfume(search_name){
-        this.$api.get('/url/api/search_perfume', {
-          search_info: search_name
+      search_one_perfume(perfume_name){
+        this.$api.get('/url/api/search_one_perfume', {
+          perfume_name: perfume_name
         }, response => {
           if (response.status >= 200 && response.status < 300) {
-            this.perfume_info1 = response.data['list1']
-            this.perfume_info2 = response.data['list2']
+            this.perfume_info2 = response.data['list']
             console.log('调用搜索成功');//请求成功，response为成功信息参数
           } else {
             console.log(response);//请求失败，response为失败信息

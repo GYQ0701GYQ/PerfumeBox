@@ -27,8 +27,26 @@ export default {
   name: 'Fragrance',
   data(){
     return{
-      isLogin:false
+      isLogin:false,
+      linkdata:'',
     }
+  },
+  watch:{
+    linkdata: {
+      handler: function (linkdata) {
+        if(linkdata) {
+          this.$router.push({name: 'SearchDetail',params:{search_type:'香调',search_name:linkdata}})
+        }
+      },
+      immediate: true
+    }
+  },
+  mounted () {
+    // 得到子页面传来的值，在子页面向父页面发送数据时会监听到
+    window.addEventListener('message',this.handle_listen,false);
+  },
+  beforeDestroy () {
+    window.removeEventListener('message',this.handle_listen,false)
   },
   methods:{
     goto_Login () {
@@ -36,6 +54,10 @@ export default {
     },
     goto_Home () {
       this.$router.push({path: '/Home'})
+    },
+    handle_listen (e){
+      this.linkdata=e.data.data
+      console.log('子页面传出的数据',this.linkdata)
     }
   }
 }

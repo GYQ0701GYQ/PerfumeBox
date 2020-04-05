@@ -11,20 +11,21 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 <!--图标库-->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">-->
 
 <!--核心样式-->
 <link rel="stylesheet" type="text/css" href="css/style.css">
 
-  <!-- 引入样式 -->
-  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-  <!-- 引入组件库 -->
-  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<!-- 引入样式 -->
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
 
 </head>
 <body>
 
 <div class="demo" id="demo">
+  <el-button @click="search_one_perfume('大地')">aaaa</el-button>
   <div class="choose_type">
     <el-radio v-model="choosed_type" label=0>A</el-radio>
     <el-radio v-model="choosed_type" label=1>B</el-radio>
@@ -53,7 +54,6 @@
     <el-radio v-model="choosed_type" label=24>Y</el-radio>
     <el-radio v-model="choosed_type" label=25>Z</el-radio>
   </div>
-<!--  <div>{{letters[choosed_type]}}</div>-->
 	<div class="container">
 		<div class="group">
       <div class="clear" ></div>
@@ -66,8 +66,8 @@
 						<span class="post">{{brands.ch_name}}</span>
 					</div>
 					<ul class="icon">
-						<li><a href="#"><i class="fa fa-search"></i></a></li>
-						<li><a href="#"><i class="fa fa-link"></i></a></li>
+						<li><a href="#"><i class="el-icon-search"></i></a></li>
+						<li><a href="#"><i class="el-icon-connection"></i></a></li>
 					</ul>
 				</div>
 			</div>
@@ -111,6 +111,42 @@ var demo=new Vue({
         }
       ]
     ]
+  },
+  created(){
+    console.log(this.letters[this.choosed_type])
+    this.sendData(this.letters[this.choosed_type])
+  },
+  watch:{
+    choosed_type: {
+      handler: function (choosed_type) {
+        if(choosed_type) {
+          this.sendData(this.letters[this.choosed_type])
+        }
+      },
+      immediate: true
+    }
+  },
+  mounted(){
+    // var that=this //避免this指向问题
+    //监听事件，取出父组件发送过来的数据
+    window.addEventListener('message',this.handle_listen)
+  },
+  beforeDestroy () {
+    window.removeEventListener('message',this.handle_listen)
+  },
+  methods:{
+    handle_listen (messageEvent){
+      // this.type = messageEvent.data.data1
+      // this.top5 = messageEvent.data.data2
+    },
+    senddata :function (sended) {
+      console.log('调用向vue发送数据的函数')
+      const that=window.parent
+      that.postMessage({
+        method: 'getBaseInfo',
+        data:sended
+      }, '*')
+    }
   }
 })
 </script>

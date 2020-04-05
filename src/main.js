@@ -17,10 +17,11 @@ import RankingList from './components/RankingList.vue'
 import Fragrance from './components/Fragrance.vue'
 import Smell from './components/Smell.vue'
 import Brand from './components/Brand.vue'
-import Flavorist from './components/Flavorist.vue'
+import Top100 from './components/Top100.vue'
 import Three from './components/ThreeDimensionBox.vue'
 import Collect from './components/Collect.vue'
 import PerfumeDetail from './components/PerfumeDetail.vue'
+import SearchDetail from './components/SearchDetail.vue'
 Vue.config.productionTip = false
 // 使用插件
 Vue.use(VueRouter)
@@ -85,10 +86,11 @@ var router = new VueRouter({
       }
     },
     {
-      path: '/Flavorist',
-      component: Flavorist,
+      path: '/Top100/:type',
+      name:'Top100',
+      component: Top100,
       meta: {
-        title: 'PerfumeBox香水盒子-调香师'
+        title: 'PerfumeBox香水盒子-排行榜Top100'
       }
     },
     {
@@ -106,11 +108,19 @@ var router = new VueRouter({
       }
     },
     {
-      path: '/PerfumeDetail/:search_name',
+      path: '/PerfumeDetail/:perfume_name',
       name:'PerfumeDetail',
       component: PerfumeDetail,
       meta: {
         title: 'PerfumeBox香水盒子-商品详情'
+      }
+    },
+    {
+      path: '/SearchDetail/:search_type/:search_name',
+      name:'SearchDetail',
+      component: SearchDetail,
+      meta: {
+        title: 'PerfumeBox香水盒子-搜索结果'
       }
     }
   ]

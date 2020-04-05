@@ -25,12 +25,12 @@
       </div>
       <div id="searchgroup" >
         <div style="margin-top: 15px;">
-          <el-input placeholder="请输入内容" v-model="input3" class="input-with-select" style="width: 450px">
+          <el-input placeholder="请输入内容" v-model="input" class="input-with-select" style="width: 450px">
             <el-select v-model="select" slot="prepend" placeholder="请选择" style="width: 80px">
-              <el-option label="香水" value="1"/>
-              <el-option label="品牌" value="2"/>
-              <el-option label="香调" value="3"/>
-              <el-option label="标签" value="4"/>
+              <el-option label="香水" value="香水"/>
+              <el-option label="品牌" value="品牌"/>
+              <el-option label="香调" value="香调"/>
+              <el-option label="标签" value="标签"/>
             </el-select>
             <el-button slot="append" icon="el-icon-search" @click="search" style="width: 80px"/>
           </el-input>
@@ -44,7 +44,6 @@
         <li class="navigation_li" @click="goto_Fragrance">香 调</li>
 <!--        <li class="navigation_li" @click="goto_Smell">气 味</li>-->
         <li class="navigation_li" @click="goto_Brand">品 牌</li>
-        <li class="navigation_li" @click="goto_Flavorist">调 香 师</li>
       </ul>
     </div>
     <div class="container">
@@ -86,26 +85,6 @@
       </ul>
     </div>
     <el-button @click="goto_Three" type="primary">测试父子页面传递数据</el-button>
-<!--    <el-row display="margin-top:10px">-->
-<!--&lt;!&ndash;      <el-input v-model="input" placeholder="请输入书名" style="display:inline-table; width: 30%; float:left"></el-input>&ndash;&gt;-->
-<!--      <el-button type="primary" @click="addBook()" style="float:left; margin: 2px;">新增</el-button>-->
-<!--      <el-button type="primary" @click="get_books()" style="float:left; margin: 2px;">neomodel测试</el-button>-->
-<!--    </el-row>-->
-<!--    <el-row>-->
-<!--      <el-table :data="bookList" style="width: 100%" border>-->
-<!--        <el-table-column prop="id" label="编号" min-width="100">-->
-<!--          <template slot-scope="scope"> {{bookList[1]}} </template>-->
-<!--        </el-table-column>-->
-<!--        <el-table-column prop="book_name" label="书名" min-width="100">-->
-<!--          <template slot-scope="scope"> {{ bookList[0]}} </template>-->
-<!--        </el-table-column>-->
-<!--&lt;!&ndash;        <el-table-column prop="add_time" label="添加时间" min-width="100">&ndash;&gt;-->
-<!--&lt;!&ndash;          <template slot-scope="scope"> {{ scope.row.fields.add_time }} </template>&ndash;&gt;-->
-<!--&lt;!&ndash;        </el-table-column>&ndash;&gt;-->
-<!--      </el-table>-->
-<!--    </el-row>-->
-<!--    <div>{{bookList}}</div>-->
-<!--    <iframe src="static/vue基础.html" frameborder="0" style="width: 100%;height: calc(100vh - 273px)"></iframe>-->
   </div>
 </template>
 
@@ -260,8 +239,6 @@ export default {
         }
       ],
       input: '',
-      bookList: [],
-      input3: '',
       select: '香水'
     }
   },
@@ -291,8 +268,8 @@ export default {
       // this.setInterval()
     },
     search(){
-      console.log('搜索内容为：'+ this.input3)
-      this.$router.push({name: 'PerfumeDetail',params:{search_name:this.input3}})
+      console.log(this.select + ':' + this.input)
+      this.$router.push({name: 'SearchDetail',params:{search_type:this.select,search_name:this.input}})
     },
     goto_Login () {
       this.$router.push({path: '/LoginRegister'})
@@ -315,9 +292,6 @@ export default {
     },
     goto_Brand () {
       this.$router.push({path: '/Brand'})
-    },
-    goto_Flavorist () {
-      this.$router.push({path: '/Flavorist'})
     },
     goto_Three () {
       this.$router.push({path: '/Three'})

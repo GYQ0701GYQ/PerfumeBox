@@ -15,8 +15,8 @@
     </div>
     <h1 class="heading">商业香品牌入门</h1>
     <iframe class="fragrance-frame" ref="mainIframe" src="../../static/pic_shade/index.html" frameborder="no" scrolling="auto" width="90%" height="670px"></iframe>
-    <h1 class="heading">沙龙香品牌入门</h1>
-    <iframe class="fragrance-frame" ref="mainIframe" src="../../static/pic_shade/index.html" frameborder="no" scrolling="auto" width="90%" height="670px"></iframe>
+<!--    <h1 class="heading">沙龙香品牌入门</h1>-->
+<!--    <iframe class="fragrance-frame" ref="mainIframe" src="../../static/pic_shade/index.html" frameborder="no" scrolling="auto" width="90%" height="670px"></iframe>-->
   </div>
 </template>
 
@@ -25,10 +25,56 @@ export default {
   name: 'Brand',
   data(){
     return{
-      isLogin:false
+      isLogin:false,
+      letter:'',
+      letter_brands:[]
     }
   },
+  watch:{
+    letter: {
+      handler: function (letter) {
+        if(letter) {
+          // this.$router.push({name: 'PerfumeDetail', params: {perfume_name: linkdata}})
+          console.log(letter)
+        }
+      },
+      immediate: true
+    }
+  },
+  mounted () {
+    //传入不同的数据渲染两个iframe页面
+    const mapFrame = this.$refs['mainIframe']
+    if (mapFrame.attachEvent) { // 兼容浏览器判断
+      var data_list = this.letter_brands
+      mapFrame.attachEvent('onload', function() {
+        const iframeWin = mapFrame.contentWindow
+        iframeWin.postMessage({
+          method: 'getBaseInfo',
+          data:data_list
+        }, '*')
+        // data传递的参数   *写成子页面的域名或者是ip
+      })
+    } else {
+      var data_list = this.letter_brands
+      mapFrame.onload = function() {
+        const iframeWin = mapFrame.contentWindow
+        iframeWin.postMessage({
+          method: 'getBaseInfo',
+          data:data_list,
+        }, '*')
+      }
+    }
+    // 得到子页面传来的值，在子页面向父页面发送数据时会监听到
+    window.addEventListener('message',this.handle_listen,false);
+  },
+  beforeDestroy () {
+    window.removeEventListener('message',this.handle_listen,false)
+  },
   methods:{
+    handle_listen (e){
+      this.linkdata=e.data.data
+      console.log('子页面传出的数据',this.linkdata)
+    },
     goto_Login () {
       this.$router.push({path: '/LoginRegister'})
     },

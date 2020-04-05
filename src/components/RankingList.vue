@@ -24,12 +24,12 @@
     </div>
     <iframe ref="mainIframe1" src="../../static/card-flip/demo.html" frameborder="0" scrolling="no" width="100%" height="510px"/>
     <div class="link">
-      <router-link  :to="{path:'/Flavorist'}"><el-link class="top200href" > > 点击查看商业香Top100</el-link></router-link>
+      <router-link  :to="{name:'Top100', params: {type:'trade'}}"><el-link class="top200href" > > 点击查看商业香Top100</el-link></router-link>
       <div class="clear"></div>
     </div>
     <iframe ref="mainIframe2" src="../../static/card-flip/demo.html" frameborder="0" scrolling="no" width="100%" height="510px"/>
     <div class="link">
-      <el-link class="top200href"> > 点击查看沙龙香Top100</el-link>
+      <router-link  :to="{name:'Top100', params: {type:'salon'}}"><el-link class="top200href"> > 点击查看沙龙香Top100</el-link></router-link>
       <div class="clear"></div>
     </div>
   </div>
@@ -66,7 +66,7 @@ export default {
     linkdata: {
       handler: function (linkdata) {
         if(linkdata) {
-          this.$router.push({name: 'PerfumeDetail', params: {search_name: linkdata}})
+          this.$router.push({name: 'PerfumeDetail', params: {perfume_name: linkdata}})
         }
       },
       immediate: true

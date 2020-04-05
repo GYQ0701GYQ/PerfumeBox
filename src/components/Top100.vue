@@ -13,17 +13,19 @@
         <table class="sameline" v-show="isLogin">用户中心</table>
       </div>
     </div>
-    <h1 class="heading">排行榜top200测试页面</h1>
+    <h1 class="heading" v-show="this.$route.params.type === 'trade'">商业香Top100</h1>
+    <h1 class="heading" v-show="this.$route.params.type === 'salon'">沙龙香Top100</h1>
     <div class="ranking">
       <el-card v-for="topinf in toplist" class="topcard" :key="topinf.index">
-        <img :src="topinf.img" class="image">
-        <div style="padding: 14px;">
-          <span>{{'Top'+topinf.id}}</span>
-          <div class="bottom clearfix">
-            <time class="time">{{ topinf.name+'---'+topinf.detail }}</time>
-            <el-button type="text" class="button">操作按钮</el-button>
-          </div>
-        </div>
+<!--        <img :src="topinf.img" class="image">-->
+<!--        <div style="padding: 14px;">-->
+<!--          <span>{{'Top'+topinf.id}}</span>-->
+<!--          <div class="bottom clearfix">-->
+<!--            <time class="time">{{ topinf.name+'-&#45;&#45;'+topinf.detail }}</time>-->
+<!--            <el-button type="text" class="button">操作按钮</el-button>-->
+<!--          </div>-->
+<!--        </div>-->
+        <div>{{topinf}}</div>
       </el-card>
     </div>
   </div>
@@ -36,59 +38,25 @@
       return {
         isLogin:false,
         currentDate: new Date(),
-        toplist:[
-          {
-            id:'1',
-            name:'爱马仕大地',
-            img:'https://img.xssdcdn.com/perfume/449262.jpg',
-            detail:'这里是香水描述信息的详细数据'
-          },
-          {
-            id:'1',
-            name:'爱马仕大地',
-            img:'https://img.xssdcdn.com/perfume/449262.jpg',
-            detail:'这里是香水描述信息的详细数据'
-          },
-          {
-            id:'1',
-            name:'爱马仕大地',
-            img:'https://img.xssdcdn.com/perfume/449262.jpg',
-            detail:'这里是香水描述信息的详细数据'
-          },
-          {
-            id:'1',
-            name:'爱马仕大地',
-            img:'https://img.xssdcdn.com/perfume/449262.jpg',
-            detail:'这里是香水描述信息的详细数据'
-          },
-          {
-            id:'1',
-            name:'爱马仕大地',
-            img:'https://img.xssdcdn.com/perfume/449262.jpg',
-            detail:'这里是香水描述信息的详细数据'
-          },
-          {
-            id:'1',
-            name:'爱马仕大地',
-            img:'https://img.xssdcdn.com/perfume/449262.jpg',
-            detail:'这里是香水描述信息的详细数据'
-          },
-          {
-            id:'1',
-            name:'爱马仕大地',
-            img:'https://img.xssdcdn.com/perfume/449262.jpg',
-            detail:'这里是香水描述信息的详细数据'
-          },
-          {
-            id:'1',
-            name:'爱马仕大地',
-            img:'https://img.xssdcdn.com/perfume/449262.jpg',
-            detail:'这里是香水描述信息的详细数据'
-          }
-        ]
+        toplist:[]
       }
     },
+    created () {
+      this.show_top100(this.$route.params.type)
+    },
     methods: {
+      show_top100(type) {
+        this.$api.get('/url/api/show_top100', {
+          type: type
+        }, response => {
+          if (response.status >= 200 && response.status < 300) {
+            this.toplist = response.data['list']
+            console.log('调用搜索成功');//请求成功，response为成功信息参数
+          } else {
+            console.log(response);//请求失败，response为失败信息
+          }
+        });
+      },
       goto_Login () {
         this.$router.push({path: '/LoginRegister'})
       },
