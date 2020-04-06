@@ -13,10 +13,8 @@
         <table class="sameline" v-show="isLogin">用户中心</table>
       </div>
     </div>
-    <h1 class="heading">商业香品牌入门</h1>
-    <iframe class="fragrance-frame" ref="mainIframe" src="../../static/pic_shade/index.html" frameborder="no" scrolling="auto" width="90%" height="670px"></iframe>
-<!--    <h1 class="heading">沙龙香品牌入门</h1>-->
-<!--    <iframe class="fragrance-frame" ref="mainIframe" src="../../static/pic_shade/index.html" frameborder="no" scrolling="auto" width="90%" height="670px"></iframe>-->
+    <h1 class="heading">品牌入门</h1>
+    <iframe class="fragrance-frame" id="mainIframe" ref="mainIframe" src="../../static/pic_shade/index.html" frameborder="no" scrolling="auto" width="90%" height="670px"></iframe>
   </div>
 </template>
 
@@ -26,23 +24,23 @@ export default {
   data(){
     return{
       isLogin:false,
-      letter:'',
+      letter:'A',
       letter_brands:[]
     }
   },
   watch:{
     letter: {
       handler: function (letter) {
+        console.log('父组件进入watch',letter)
         if(letter) {
-          // this.$router.push({name: 'PerfumeDetail', params: {perfume_name: linkdata}})
-          console.log(letter)
+          console.log('letter有效')
+          this.search_one_letter(letter)
         }
       },
       immediate: true
     }
   },
   mounted () {
-    //传入不同的数据渲染两个iframe页面
     const mapFrame = this.$refs['mainIframe']
     if (mapFrame.attachEvent) { // 兼容浏览器判断
       var data_list = this.letter_brands
@@ -71,15 +69,52 @@ export default {
     window.removeEventListener('message',this.handle_listen,false)
   },
   methods:{
+    search_one_letter(search_letter){
+      console.log('调用接口')
+      var that = this
+      this.$api.get('/url/api/search_one_letter', {
+        search_letter: search_letter
+      }, response => {
+        if (response.status >= 200 && response.status < 300) {
+          this.letter_brands = response.data['list']
+          that.send_to_iframe() //搜索结束后将结果传递给iframe
+          console.log('调用搜索成功');//请求成功，response为成功信息参数
+        } else {
+          console.log('失败', response);//请求失败，response为失败信息
+          this.$message.error('未查询到相关内容')
+        }
+      });
+    },
     handle_listen (e){
-      this.linkdata=e.data.data
-      console.log('子页面传出的数据',this.linkdata)
+      if(e.data.data) {
+        this.letter = e.data.data
+      }
     },
     goto_Login () {
       this.$router.push({path: '/LoginRegister'})
     },
     goto_Home () {
       this.$router.push({path: '/Home'})
+    },
+    send_to_iframe() {
+      const mapFrame = this.$refs['mainIframe']
+        var data_list = this.letter_brands
+      if(this.letter === 'A') {  //首次加载和其他字母的筛选要区分开，否则会影响数据传递
+        mapFrame.onload = function () {
+          const iframeWin = mapFrame.contentWindow
+          iframeWin.postMessage({
+            method: 'getBaseInfo',
+            data: data_list,
+          }, '*')
+        }
+      }
+      else{
+        const iframeWin = mapFrame.contentWindow
+        iframeWin.postMessage({
+          method: 'getBaseInfo',
+          data: data_list,
+        }, '*')
+      }
     }
   }
 }
