@@ -31,9 +31,7 @@ export default {
   watch:{
     letter: {
       handler: function (letter) {
-        console.log('父组件进入watch',letter)
         if(letter) {
-          console.log('letter有效')
           this.search_one_letter(letter)
         }
       },
@@ -70,7 +68,6 @@ export default {
   },
   methods:{
     search_one_letter(search_letter){
-      console.log('调用接口')
       var that = this
       this.$api.get('/url/api/search_one_letter', {
         search_letter: search_letter
@@ -86,8 +83,22 @@ export default {
       });
     },
     handle_listen (e){
-      if(e.data.data) {
+      if(e.data.data && e.data.method==='getBaseInfo') {
         this.letter = e.data.data
+      }
+      if(e.data.method==='getBrandInfo'){
+        const h = this.$createElement;
+        this.$message({
+          message: h('p', null, [
+            h('b', { style: 'padding-left: 10px;padding-right: 12px;' }, e.data.title),
+            h('p', { style: 'color: teal;font-size:15px;padding-left: 12px;padding-right: 12px;' }, e.data.content)
+          ]),
+          showClose: true,
+          duration:3000
+        });
+      }
+      if(e.data.method==='getBrandName'){
+        this.$router.push({name: 'SearchDetail',params:{search_type:'品牌',search_name:e.data.brand_name}})
       }
     },
     goto_Login () {

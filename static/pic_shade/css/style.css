@@ -115,7 +115,7 @@ body{
 	transform: scale(1);
 }
 .box:hover .icon li:nth-child(2){ transition: all 0.3s ease 0.2s; }
-.box .icon li a{
+.box .icon li div{
 	color: #1a9be6;
 	background: #fff;
 	font-size: 16px;
@@ -126,7 +126,7 @@ body{
 	display: block;
 	transition: all 0.5s ease;
 }
-.box .icon li  a:hover{
+.box .icon li  div:hover{
 	color: #fff;
 	background-color:#1a9be6;
 	box-shadow: 0 0 5px #000;

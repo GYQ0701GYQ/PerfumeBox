@@ -54,74 +54,45 @@
     <el-radio v-model="choosed_type" label=24>Y</el-radio>
     <el-radio v-model="choosed_type" label=25>Z</el-radio>
   </div>
-  <div>{{brand_info}}</div>
-<!--	<div class="container">-->
-<!--		<div class="group">-->
-<!--      <div class="clear" ></div>-->
-<!--      <div class="letter_title"><h1>{{letters[choosed_type]}}</h1></div>-->
-<!--			<div class="unknow" v-for="brands in brand_info[choosed_type]">-->
-<!--				<div class="box">-->
-<!--					<img :src="brands.logo_src">-->
-<!--					<div class="box-content">-->
-<!--						<h3 class="title">{{brands.eng_name}}</h3>-->
-<!--						<span class="post">{{brands.ch_name}}</span>-->
-<!--					</div>-->
-<!--					<ul class="icon">-->
-<!--						<li><a href="#"><i class="el-icon-search"></i></a></li>-->
-<!--						<li><a href="#"><i class="el-icon-connection"></i></a></li>-->
-<!--					</ul>-->
-<!--				</div>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--	</div>-->
+<!--  <div>{{brand_info}}</div>-->
+	<div class="container">
+		<div class="group">
+      <div class="clear" ></div>
+      <div class="letter_title"><h1>{{letters[choosed_type]}}</h1></div>
+			<div class="unknow" v-for="brands in brand_info">
+				<div class="box">
+					<img :src="brands[1]">
+					<div class="box-content">
+						<h3 class="title" v-show="brands[3].length===2">{{brands[3][1]}}</h3>
+						<span class="post" v-show="brands[3].length===2">{{brands[3][0]}}</span>
+            <span class="post" v-show="brands[3].length!==2">{{brands[3]}}</span>
+					</div>
+					<ul class="icon">
+						<li><div @click="first_button(brands[3][0],brands[0])"><el-tooltip content="查看信息" placement="top"><i class="el-icon-connection"></i></el-tooltip></div></li>
+						<li v-show="brands[3].length!==2"><div @click="second_button(brands[3])"><el-tooltip content="查找香水" placement="top"><i class="el-icon-search"></i></el-tooltip></div></li>
+            <li v-show="brands[3].length===2"><div @click="second_button(brands[3][0])"><el-tooltip content="查找香水" placement="top"><i class="el-icon-search"></i></el-tooltip></div></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <script>
 <!--创建VUE实例-->
-var vm222 =new Vue({
+var vm =new Vue({
   el:'#demo',
   data:{
     choosed_type:'0',
     letters:['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'],
-    brand_info:[
-      [
-        {
-          logo_src:'https://img.xssdcdn.com/brand/91761.jpg',
-          eng_name:'Atelier Cologne',
-          ch_name:'欧珑'
-        },
-        {
-          logo_src: 'https://img.xssdcdn.com/brand/20871.jpg',
-          eng_name: 'Amouage',
-          ch_name: '爱慕'
-        },
-        {
-          logo_src: 'https://img.xssdcdn.com/brand/51198.jpg',
-          eng_name: 'Acqua di Parma',
-          ch_name: '帕尔玛之水'
-        },
-        {
-          logo_src: 'https://img.xssdcdn.com/brand/35498.jpg',
-          eng_name: 'Anna Sui',
-          ch_name: '安娜苏'
-        },
-        {
-          logo_src: 'https://img.xssdcdn.com/brand/33391.jpg',
-          eng_name: 'Acca Kappa',
-          ch_name: '艾克卡帕'
-        }
-      ]
-    ]
+    brand_info:[]
   },
   created(){
-    // console.log('子组件进入creat')
-    // console.log(this.letters[this.choosed_type])
     this.senddata(this.letters[this.choosed_type])
   },
   watch:{
     choosed_type: {
       handler: function (choosed_type) {
-        console.log('子组件进入watch')
         if(choosed_type) {
           this.senddata(this.letters[choosed_type])
         }
@@ -138,15 +109,29 @@ var vm222 =new Vue({
   },
   methods:{
     handle_listen (messageEvent){
-      console.log('子组件进入listen')
+      this.brand_info = []
       this.brand_info = messageEvent.data.data
     },
     senddata :function (sended) {
-      console.log('调用向vue发送数据的函数')
       const that=window.parent
       that.postMessage({
         method: 'getBaseInfo',
         data:sended
+      }, '*')
+    },
+    first_button(title,content){
+      const that=window.parent
+      that.postMessage({
+        method: 'getBrandInfo',
+        title:title,
+        content:content
+      }, '*')
+    },
+    second_button(brand_name){
+      const that=window.parent
+      that.postMessage({
+        method: 'getBrandName',
+        brand_name:brand_name
       }, '*')
     }
   }
