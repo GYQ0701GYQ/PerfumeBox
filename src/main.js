@@ -40,49 +40,56 @@ var router = new VueRouter({
       path: '/Home',
       component: Home,
       meta: {
-        title: 'PerfumeBox香水盒子-首页'
+        title: 'PerfumeBox香水盒子-首页',
+        isLogin: false
       }
     },
     {
       path: '/NewMemberGuide',
       component: NewMemberGuide,
       meta: {
-        title: 'PerfumeBox香水盒子-新手入门'
+        title: 'PerfumeBox香水盒子-新手入门',
+        isLogin: false
       }
     },
     {
       path: '/LoginRegister',
       component: LoginRegister,
       meta: {
-        title: 'PerfumeBox香水盒子-登录&注册'
+        title: 'PerfumeBox香水盒子-登录&注册',
+        isLogin: false
       }
     },
     {
       path: '/RankingList',
       component: RankingList,
       meta: {
-        title: 'PerfumeBox香水盒子-排行榜'
+        title: 'PerfumeBox香水盒子-排行榜',
+        isLogin: true
       }
     },
     {
       path: '/Fragrance',
       component: Fragrance,
       meta: {
-        title: 'PerfumeBox香水盒子-香调'
+        title: 'PerfumeBox香水盒子-香调',
+        isLogin: true
       }
     },
     {
       path: '/Smell',
       component: Smell,
       meta: {
-        title: 'PerfumeBox香水盒子-气味'
+        title: 'PerfumeBox香水盒子-气味',
+        isLogin: true
       }
     },
     {
       path: '/Brand',
       component: Brand,
       meta: {
-        title: 'PerfumeBox香水盒子-品牌'
+        title: 'PerfumeBox香水盒子-品牌',
+        isLogin: true
       }
     },
     {
@@ -90,21 +97,24 @@ var router = new VueRouter({
       name:'Top100',
       component: Top100,
       meta: {
-        title: 'PerfumeBox香水盒子-排行榜Top100'
+        title: 'PerfumeBox香水盒子-排行榜Top100',
+        isLogin: true
       }
     },
     {
       path: '/Three',
       component: Three,
       meta: {
-        title: 'PerfumeBox香水盒子-3D盒子效果测试'
+        title: 'PerfumeBox香水盒子-3D盒子效果测试',
+        isLogin: false
       }
     },
     {
       path: '/Collect',
       component: Collect,
       meta: {
-        title: 'PerfumeBox用户中心-收藏夹'
+        title: 'PerfumeBox用户中心-收藏夹',
+        isLogin: true
       }
     },
     {
@@ -112,7 +122,8 @@ var router = new VueRouter({
       name:'PerfumeDetail',
       component: PerfumeDetail,
       meta: {
-        title: 'PerfumeBox香水盒子-商品详情'
+        title: 'PerfumeBox香水盒子-商品详情',
+        isLogin: true
       }
     },
     {
@@ -120,7 +131,8 @@ var router = new VueRouter({
       name:'SearchDetail',
       component: SearchDetail,
       meta: {
-        title: 'PerfumeBox香水盒子-搜索结果'
+        title: 'PerfumeBox香水盒子-搜索结果',
+        isLogin: true
       }
     }
   ]
@@ -128,6 +140,31 @@ var router = new VueRouter({
 // 跳转后返回顶部
 router.afterEach((to,from,next) => {
   window.scrollTo(0,0);
+})
+//路由守卫
+router.beforeEach((to, from, next)=>{
+  console.log('session存储',window.sessionStorage.data)
+  if(window.sessionStorage.data === '1'){
+    console.log('登录状态验证ok');
+    if(to.path === '/'){
+      //登录状态下 访问login.vue页面 会跳到index.vue
+      next({path: '/Home'});
+    }else{
+      next();
+    }
+  }else{
+    //用户想进入需要登录的页面，则定向回登录界面
+    if(to.meta.isLogin){
+      alert('检测到您未登录，请先登录')
+      next({
+        path: '/LoginRegister',
+      })
+    //用户进入无需登录的界面，则跳转继续
+    }else{
+      next()
+    }
+
+  }
 })
 
 new Vue({

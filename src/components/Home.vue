@@ -103,7 +103,7 @@ export default {
       // list: [],
       isFixed: false,
       index: 0,
-      isLogin: true,
+      isLogin: false,
       container_img: [
         {
           url: 'https://www.nosetime.com/wenzhang/230.html',
@@ -242,6 +242,11 @@ export default {
       select: '香水'
     }
   },
+  created () {
+    if(window.sessionStorage.data === '1'){
+      this.isLogin = true
+    }
+  },
   mounted () {
     window.addEventListener('scroll', this.handleScroll)
     setInterval(() => {
@@ -291,7 +296,7 @@ export default {
       this.$router.push({path: '/Smell'})
     },
     goto_Brand () {
-      this.$router.push({path: '/Brand'})
+      this.$router.push({path: '/Brand'}, onComplete => { }, onAbort => { })
     },
     goto_Three () {
       this.$router.push({path: '/Three'})
@@ -303,6 +308,7 @@ export default {
         type: 'warning'
       }).then(() => {
         this.isLogin=false
+        window.sessionStorage.removeItem('data');
         this.$message({
           type: 'success',
           message: '成功退出登录!'
@@ -329,50 +335,6 @@ export default {
           break;
       }
     }
-    // addBook () {
-    //   this.$http.get('http://127.0.0.1:8000/api/add_book?book_name=' + this.input)
-    //     .then((response) => {
-    //       //console.log(response)
-    //       var res = JSON.parse(response.bodyText)
-    //       console.log(res)
-    //       if (res.error_num === 0) {
-    //         this.showBooks()
-    //       } else {
-    //         this.$message.error('新增书籍失败，请重试')
-    //         console.log(res['msg'])
-    //       }
-    //     })
-    // },
-    // showBooks () {
-    //   this.$http.get('http://127.0.0.1:8000/api/show_books')
-    //     .then((response) => {
-    //       console.log(response)
-    //       var res = JSON.parse(response.bodyText)
-    //       console.log(res)
-    //       if (res.error_num === 0) {
-    //         this.bookList = res['list']
-    //         console.log(this.bookList)
-    //       } else {
-    //         this.$message.error('查询书籍失败')
-    //         console.log(res['msg'])
-    //       }
-    //     })
-    // },
-    // get_books(){
-    //   this.$http.get('http://127.0.0.1:8000/api/get_books')
-    //     .then((response) => {
-    //       console.log(response)
-    //       //var res = JSON.parse(response.bodyText)
-    //       //console.log(res)
-    //       if (res.error_num === 0) {
-    //         //this.bookList = res['list']
-    //         //console.log(this.bookList)
-    //       } else {
-    //         //this.$message.error('查询书籍失败')
-    //         //console.log(res['msg'])
-    //       }
-    //     })
-    // }
   }
 }
 </script>
