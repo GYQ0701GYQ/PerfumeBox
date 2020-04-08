@@ -1,16 +1,22 @@
 <template>
     <div>
       <h3>{{'关于【'+this.$route.params.search_type + ':' + this.$route.params.search_name + '】的信息如下'}}</h3>
+      <el-row :gutter="20" style="margin-bottom: 20px;" v-for="(each_perfume,index1) in page_data" :key="each_perfume.index">
+        <el-col :span="2" style="border-radius: 4px;"><div class="grid-content bg-purple-light">{{(current_page-1)*page_size+index1+1}}</div></el-col>
+        <el-col :span="18" style="border-radius: 4px;"><div class="grid-content bg-purple-light"  @click="search_one_perfume(each_perfume)">{{each_perfume}}</div></el-col>
+        <el-col :span="2" style="border-radius: 4px;"><div class="grid-content bg-purple-light"><i class="el-icon-goods"/></div></el-col>
+        <el-col :span="2" style="border-radius: 4px;"><div class="grid-content bg-purple-light"><i class="el-icon-star-off"/></div></el-col>
+      </el-row>
       <div class="pagination">
-        <el-pagination background layout="prev, pager, next, sizes" :current-page="current_page" :page-sizes="[10, 20, 30, 40]" :page-size="page_size" :total="total_num" @size-change="handleSizeChange" @current-change="handleCurrentChange"/>
+        <el-pagination background layout="total,prev, pager, next, sizes" :current-page="current_page" :page-sizes="[10, 20, 30, 40]" :page-size="page_size" :total="total_num" @size-change="handleSizeChange" @current-change="handleCurrentChange"/>
       </div>
-      <div v-for="(each_perfume,index1) in page_data" :key="each_perfume.index">
-        <h1>{{index1+1}}</h1>
-        <div v-for="(each_tag,index2) in each_perfume" :key="each_tag.index">
-          <div v-show="each_tag!=='#'"><b>{{perfume_info1[index2]+': '}}</b>{{each_tag}}</div>
-          <br v-show="each_tag!=='#'">
-        </div>
-      </div>
+<!--      <div v-for="(each_perfume,index1) in page_data" :key="each_perfume.index">-->
+<!--        <h1>{{index1+1}}</h1>-->
+<!--        <div v-for="(each_tag,index2) in each_perfume" :key="each_tag.index">-->
+<!--          <div v-show="each_tag!=='#'"><b>{{perfume_info1[index2]+': '}}</b>{{each_tag}}</div>-->
+<!--          <br v-show="each_tag!=='#'">-->
+<!--        </div>-->
+<!--      </div>-->
     </div>
 </template>
 
@@ -34,7 +40,6 @@
     watch:{
       current_page: {
         handler: function (current_page) {
-          console.log('当前页数',current_page)
           if(current_page<this.max_page){
             this.page_data = this.perfume_info2.slice(this.page_size*(current_page-1),this.page_size*current_page)
           }
@@ -46,7 +51,6 @@
       },
       page_size:{
         handler: function (page_size) {
-          console.log('每页大小',page_size)
           this.max_page = Math.ceil(this.total_num/page_size)
           if(this.current_page<this.max_page){
             this.page_data = this.perfume_info2.slice(page_size*(this.current_page-1),page_size*this.current_page)
@@ -82,16 +86,43 @@
           }
         });
       },
+      search_one_perfume(perfume_name){
+        this.$router.push({name: 'PerfumeDetail', params: {perfume_name:perfume_name}})
+      },
       handleCurrentChange(current_page) {
         this.current_page = current_page
       },
       handleSizeChange(size) {
         this.page_size = size
-      },
+      }
     }
   }
 </script>
 
 <style scoped>
-
+  el-row {
+    margin-bottom: 10px;
+  }
+  el-col {
+    border-radius: 4px;
+  }
+  .bg-purple-light {
+    background: #e5e9f2;
+  }
+  .grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+    font-size: 17px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+  }
+  .pagination{
+    margin-top: 20px;
+    margin-bottom: 30px;
+    font-size: 17px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+  }
 </style>
