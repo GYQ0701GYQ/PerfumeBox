@@ -75,28 +75,27 @@ export default {
     // 提交表单
     submitForm (formName) {
       this.$refs[formName].validate(valid => {
-        if (valid) {
+        if (valid) {//登录信息有效则调用登录接口
           this.$api.get('/url/api/user_login', {
             user_name: this.ruleForm.name,
             user_password:this.ruleForm.pass
           }, response => {
             var ses = window.sessionStorage
-            console.log('ses',ses)
             if (response.status >= 200 && response.status < 300 && response.data['error_num']===0) {
-              // 把token放在sessionStorage中
+              // 把标记放在sessionStorage中
               ses.setItem('data', '1');
-              console.log('ses',ses)
-              this.$router.push({path: '/Home'})
-              // this.$parent.$data.userTitle = res[index].usertitle;
-              console.log('调用搜索成功');//请求成功，response为成功信息参数
+              ses.setItem('user',this.ruleForm.name)
+              this.$message.success(response.data['msg'])
+              this.$router.go(-1)
             } else if(response.data['error_num']===2){
-              this.$message.error('用户名或密码错误，请重试')
+              this.$message.error(response.data['msg'])
             }else {
+              this.$message.error('用户名含有特殊字符或服务器暂无响应，请重试')
               console.log(response);//请求失败，response为失败信息
             }
           });
         } else {
-          console.log('error submit!!')
+          this.$message.error('输入不规范，请重试')
           return false
         }
       })

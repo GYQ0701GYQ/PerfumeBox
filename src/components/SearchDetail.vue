@@ -1,28 +1,26 @@
 <template>
     <div>
-      <h3>{{'关于【'+this.$route.params.search_type + ':' + this.$route.params.search_name + '】的信息如下'}}</h3>
-      <el-row :gutter="20" style="margin-bottom: 20px;" v-for="(each_perfume,index1) in page_data" :key="each_perfume.index">
+      <Banner/>
+      <h3 class="heading">{{'关于【'+this.$route.params.search_type + ':' + this.$route.params.search_name + '】的信息如下'}}</h3>
+      <el-row :gutter="20" style="margin-bottom:20px;margin-top:20px;margin-left:5%;width:90%;" v-for="(each_perfume,index1) in page_data" :key="each_perfume.index">
         <el-col :span="2" style="border-radius: 4px;"><div class="grid-content bg-purple-light">{{(current_page-1)*page_size+index1+1}}</div></el-col>
         <el-col :span="18" style="border-radius: 4px;"><div class="grid-content bg-purple-light"  @click="search_one_perfume(each_perfume)">{{each_perfume}}</div></el-col>
-        <el-col :span="2" style="border-radius: 4px;"><div class="grid-content bg-purple-light"><i class="el-icon-goods"/></div></el-col>
-        <el-col :span="2" style="border-radius: 4px;"><div class="grid-content bg-purple-light"><i class="el-icon-star-off"/></div></el-col>
+        <el-col :span="2" style="border-radius: 4px;"><div class="grid-content bg-purple-light"><el-tooltip content="加入购物车" placement="top"><i class="el-icon-goods"/></el-tooltip></div></el-col>
+        <el-col :span="2" style="border-radius: 4px;"><div class="grid-content bg-purple-light"><el-tooltip content="收藏香水" placement="top"><i class="el-icon-star-off"/></el-tooltip></div></el-col>
       </el-row>
       <div class="pagination">
         <el-pagination background layout="total,prev, pager, next, sizes" :current-page="current_page" :page-sizes="[10, 20, 30, 40]" :page-size="page_size" :total="total_num" @size-change="handleSizeChange" @current-change="handleCurrentChange"/>
       </div>
-<!--      <div v-for="(each_perfume,index1) in page_data" :key="each_perfume.index">-->
-<!--        <h1>{{index1+1}}</h1>-->
-<!--        <div v-for="(each_tag,index2) in each_perfume" :key="each_tag.index">-->
-<!--          <div v-show="each_tag!=='#'"><b>{{perfume_info1[index2]+': '}}</b>{{each_tag}}</div>-->
-<!--          <br v-show="each_tag!=='#'">-->
-<!--        </div>-->
-<!--      </div>-->
     </div>
 </template>
 
 <script>
+  import Banner from './Banner'
   export default {
     name: 'SearchDetail',
+    components:{
+      Banner
+    },
     data(){
       return{
         perfume_info1:['标签：','发布时间：','名称：','图片：','香调：','属性：','简介：','品牌：','中调：','前调：','调香师：','后调：'],
@@ -100,6 +98,28 @@
 </script>
 
 <style scoped>
+  .heading {
+    width: 100%;
+    margin-left: 5%;
+    font-weight: 900;
+    font-size: 1.618rem;
+    text-transform: uppercase;
+    letter-spacing: .1ch;
+    line-height: 1;
+    padding-bottom: .5em;
+    margin-bottom: 0;
+    margin-top: 3%;
+    position: relative;
+  }
+  .heading:after {
+    display: block;
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(135deg, #C4F6F6, #1a9be6);
+    bottom: 0;
+  }
   el-row {
     margin-bottom: 10px;
   }
@@ -107,7 +127,8 @@
     border-radius: 4px;
   }
   .bg-purple-light {
-    background: #e5e9f2;
+    /*background: #e5e9f2;*/
+    background: linear-gradient(0deg,#F1FCFC,#F7F7F7);
   }
   .grid-content {
     border-radius: 4px;

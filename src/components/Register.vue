@@ -15,13 +15,15 @@
 export default {
   data () {
     var validatePass = (rule, value, callback) => {
+      const reg =/^[_a-zA-Z0-9]+$/;
       if (value === '') {
         callback(new Error('请输入密码'))
       } else {
-        if (this.ruleForm.checkPass !== '') {
-          this.$refs.ruleForm.validateField('checkPass')
+        if (reg.test(value)){
+          callback();
+        } else {
+          callback(new Error('密码仅由英文字母，数字以及下划线组成'));
         }
-        callback()
       }
     }
 
@@ -44,7 +46,7 @@ export default {
       },
       rules: {
         name: [{ required: true, message: '请输入您的名称(2-10字符)', trigger: 'blur' }, { min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur' }],
-        pass: [{ required: true, validator: validatePass, trigger: 'blur' }],
+        pass: [{ required: true, message: '请输入您的密码(2-18位，仅由字母数字下划线组成)', validator: validatePass, trigger: 'blur' } ,{ min: 2, max: 18, message: '长度在 2 到 18 位', trigger: 'blur' }],
         checkPass: [{ required: true, validator: validatePass2, trigger: 'blur' }]
       }
     }
@@ -54,13 +56,27 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.$message({
-            type: 'success',
-            message: '注册成功'
-          })
-          // this.activeName: 'first',
+          this.$api.get('/url/api/user_register', {
+            user_name: this.ruleForm.name,
+            user_password:this.ruleForm.pass
+          }, response => {
+            var ses = window.sessionStorage
+            if (response.status >= 200 && response.status < 300 && response.data['error_num']===0) {
+              // 把标记放在sessionStorage中
+              ses.setItem('data', '1');
+              ses.setItem('user',this.ruleForm.name)
+              // console.log('ses',ses)
+              this.$message.success(response.data['msg'])
+              this.$router.go(-1)
+            } else if(response.data['error_num']===2){
+              this.$message.error(response.data['msg'])
+            }else {
+              this.$message.error('用户名含有特殊字符或服务器暂无响应，请重试')
+              console.log(response);//请求失败，response为失败信息
+            }
+          });
         } else {
-          console.log('error submit!!')
+          this.$message.error('输入不规范，请重试')
           return false
         }
       })

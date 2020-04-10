@@ -30,6 +30,7 @@
               <el-option label="香水" value="香水"/>
               <el-option label="品牌" value="品牌"/>
               <el-option label="香调" value="香调"/>
+              <el-option label="属性" value="属性"/>
               <el-option label="标签" value="标签"/>
             </el-select>
             <el-button slot="append" icon="el-icon-search" @click="search" style="width: 80px"/>
@@ -274,7 +275,7 @@ export default {
     },
     search(){
       console.log(this.select + ':' + this.input)
-      this.$router.push({name: 'SearchDetail',params:{search_type:this.select,search_name:this.input}})
+      this.$router.push({name: 'SearchDetail',params:{search_type:this.select,search_name:this.input}}, onComplete => { }, onAbort => { })
     },
     goto_Login () {
       this.$router.push({path: '/LoginRegister'})
@@ -287,13 +288,13 @@ export default {
       this.$router.push({path: '/Home'})
     },
     goto_RankingList () {
-      this.$router.push({path: '/RankingList'})
+      this.$router.push({path: '/RankingList'}, onComplete => { }, onAbort => { })
     },
     goto_Fragrance () {
-      this.$router.push({path: '/Fragrance'})
+      this.$router.push({path: '/Fragrance'}, onComplete => { }, onAbort => { })
     },
     goto_Smell () {
-      this.$router.push({path: '/Smell'})
+      this.$router.push({path: '/Smell'}, onComplete => { }, onAbort => { })
     },
     goto_Brand () {
       this.$router.push({path: '/Brand'}, onComplete => { }, onAbort => { })
@@ -309,6 +310,7 @@ export default {
       }).then(() => {
         this.isLogin=false
         window.sessionStorage.removeItem('data');
+        window.sessionStorage.removeItem('user');
         this.$message({
           type: 'success',
           message: '成功退出登录!'
@@ -323,10 +325,10 @@ export default {
     handleCommand(command) {
       switch (command) {
         case 'a':
-          this.$router.push({path: '/Collect'});
+          this.$router.push({path: '/Collect'}, onComplete => { }, onAbort => { });
           break;
         case 'b':
-          this.$router.push({path: '/Collect'});
+          this.$router.push({path: '/Collect'}, onComplete => { }, onAbort => { });
           break;
         case 'c':
           this.logout();

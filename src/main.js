@@ -143,9 +143,8 @@ router.afterEach((to,from,next) => {
 })
 //路由守卫
 router.beforeEach((to, from, next)=>{
-  console.log('session存储',window.sessionStorage.data)
+  console.log('当前用户',window.sessionStorage.user)
   if(window.sessionStorage.data === '1'){
-    console.log('登录状态验证ok');
     if(to.path === '/'){
       //登录状态下 访问login.vue页面 会跳到index.vue
       next({path: '/Home'});
