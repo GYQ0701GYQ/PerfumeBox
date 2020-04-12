@@ -15,7 +15,7 @@ import NewMemberGuide from './components/NewMemberGuide.vue'
 import LoginRegister from './components/Login.vue'
 import RankingList from './components/RankingList.vue'
 import Fragrance from './components/Fragrance.vue'
-import Smell from './components/Smell.vue'
+import ShoppingCart from './components/ShoppingCart.vue'
 import Brand from './components/Brand.vue'
 import Top100 from './components/Top100.vue'
 import Three from './components/ThreeDimensionBox.vue'
@@ -77,14 +77,6 @@ var router = new VueRouter({
       }
     },
     {
-      path: '/Smell',
-      component: Smell,
-      meta: {
-        title: 'PerfumeBox香水盒子-气味',
-        isLogin: true
-      }
-    },
-    {
       path: '/Brand',
       component: Brand,
       meta: {
@@ -107,6 +99,14 @@ var router = new VueRouter({
       meta: {
         title: 'PerfumeBox香水盒子-3D盒子效果测试',
         isLogin: false
+      }
+    },
+    {
+      path: '/ShoppingCart',
+      component: ShoppingCart,
+      meta: {
+        title: 'PerfumeBox香水盒子-购物车',
+        isLogin: true
       }
     },
     {

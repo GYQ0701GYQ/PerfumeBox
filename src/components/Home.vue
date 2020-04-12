@@ -43,7 +43,6 @@
         <li class="navigation_li" @click="goto_Home">首 页</li>
         <li class="navigation_li" @click="goto_RankingList">排 行</li>
         <li class="navigation_li" @click="goto_Fragrance">香 调</li>
-<!--        <li class="navigation_li" @click="goto_Smell">气 味</li>-->
         <li class="navigation_li" @click="goto_Brand">品 牌</li>
       </ul>
     </div>
@@ -293,9 +292,6 @@ export default {
     goto_Fragrance () {
       this.$router.push({path: '/Fragrance'}, onComplete => { }, onAbort => { })
     },
-    goto_Smell () {
-      this.$router.push({path: '/Smell'}, onComplete => { }, onAbort => { })
-    },
     goto_Brand () {
       this.$router.push({path: '/Brand'}, onComplete => { }, onAbort => { })
     },
@@ -325,7 +321,7 @@ export default {
     handleCommand(command) {
       switch (command) {
         case 'a':
-          this.$router.push({path: '/Collect'}, onComplete => { }, onAbort => { });
+          this.$router.push({path: '/ShoppingCart'}, onComplete => { }, onAbort => { });
           break;
         case 'b':
           this.$router.push({path: '/Collect'}, onComplete => { }, onAbort => { });

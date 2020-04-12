@@ -78,10 +78,10 @@
       handleCommand(command) {
         switch (command) {
           case 'a':
-            this.$router.push({path: '/Collect'});
+            this.$router.push({path: '/ShoppingCart'}, onComplete => { }, onAbort => { });
             break;
           case 'b':
-            this.$router.push({path: '/Collect'});
+            this.$router.push({path: '/Collect'}, onComplete => { }, onAbort => { });
             break;
           case 'c':
             this.logout();

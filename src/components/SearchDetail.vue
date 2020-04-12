@@ -78,7 +78,7 @@
             }
             console.log('调用搜索成功');//请求成功，response为成功信息参数
           } else {
-            console.log(response);//请求失败，response为失败信息
+            console.log('失败信息',response);//请求失败，response为失败信息
             this.$message.error('未查询到相关内容')
             this.$router.go(-1)
           }
@@ -103,7 +103,6 @@
     margin-left: 5%;
     font-weight: 900;
     font-size: 1.618rem;
-    text-transform: uppercase;
     letter-spacing: .1ch;
     line-height: 1;
     padding-bottom: .5em;
