@@ -47,21 +47,21 @@
       </ul>
     </div>
     <div class="container">
-      <a v-show="i===index" v-for="(item,i) in container_img" :key="item.id" :href="item.url">
+      <router-link  :to="{name:'Article', params: {article_num:index,article_title:item.title}}" v-show="i===index" v-for="(item,i) in container_img" :key="item.id" :href="item.url">
         <img :src="item.img" alt="">
-      </a>
+      </router-link>
       <ul class="indexes">
         <li v-for="(item,i) in container_img" :key="item.id" :class="{active:i===index}" @mouseover="mouseover_li(i)"></li>
       </ul>
     </div>
     <div class="article_index">
-      <template v-for="img_info in article_imgs">
+      <template v-for="(img_info,index1) in article_imgs">
         <ul :key="img_info.id" class="article_ul">
-          <li v-for="one_img_info in img_info" :key="one_img_info.id">
-            <a :href="one_img_info.url" class="article_img">
+          <li v-for="(one_img_info,index2) in img_info" :key="one_img_info.id">
+            <router-link  :to="{name:'Article', params: {article_num:5+index1*3+index2,article_title:one_img_info.title}}" class="article_img">
               <img :src="one_img_info.img" alt="" width="400px">
-            </a>
-            <div class="article_title"><a :href="one_img_info.url" class="article_title">{{one_img_info.title}}</a></div>
+            </router-link>
+            <div class="article_title"><router-link  :to="{name:'Article', params: {article_num:5+index1*3+index2,article_title:one_img_info.title}}" class="article_title">{{one_img_info.title}}</router-link></div>
           </li>
         </ul>
       </template>
@@ -84,7 +84,7 @@
         </li>
       </ul>
     </div>
-    <el-button @click="goto_Three" type="primary">测试父子页面传递数据</el-button>
+<!--    <el-button @click="goto_Three" type="primary">测试父子页面传递数据</el-button>-->
   </div>
 </template>
 
@@ -100,29 +100,29 @@ export default {
       backgroundDiv: {
         backgroundImage: 'url(' + require('../assets/banner3.png') + ')'
       },
-      // list: [],
+      list: [],
       isFixed: false,
       index: 0,
       isLogin: false,
       container_img: [
         {
-          url: 'https://www.nosetime.com/wenzhang/230.html',
+          title: '香水品牌25宗最(上)：谁才是香水界的吉尼斯纪录？',
           img: 'https://img.xssdcdn.com/static/index/2.jpg'
         },
         {
-          url: 'https://www.nosetime.com/wenzhang/355.html',
+          title: '什么香水让人上瘾: 在吸过1500种香水后，我总结出了这篇指南！',
           img: 'https://img.xssdcdn.com/static/index/3.jpg'
         },
         {
-          url: 'https://www.nosetime.com/wenzhang/240.html',
+          title: '香水葵花宝典：50个沙龙品牌全解析（上）',
           img: 'https://img.xssdcdn.com/static/index/4.jpg'
         },
         {
-          url: 'https://www.nosetime.com/wenzhang/283.html',
+          title: '佛系香水终极指南：这份Top10榜单让你随心所欲，怎样都行！',
           img: 'https://img.xssdcdn.com/static/index/5.jpg'
         },
         {
-          url: 'https://www.nosetime.com/wenzhang/273.html',
+          title: '沙龙香水中的教科书品牌：40款热门阿蒂仙全线评测！',
           img: 'https://img.xssdcdn.com/static/index/6.jpg'
         }
       ],
@@ -156,45 +156,45 @@ export default {
             title: '治愈系香水TOP 10: 寻找嗅觉的“深夜食堂”'
           },
           {
-            img: 'https://img.xssdcdn.com/article/358/0.jpg!l',
-            url: 'https://www.nosetime.com/wenzhang/358.html',
-            title: '一杯凉白开，给你温暖的家'
+            img: 'https://img.xssdcdn.com/article/366/1.jpg!l',
+            url: 'https://www.nosetime.com/wenzhang/366.html',
+            title: '12款「春日气息」香水，吹散2020年初的阴霾！'
           }
         ],
-        [
-          {
-            img: 'https://img.xssdcdn.com/article/334/0.jpg!l',
-            url: 'https://www.nosetime.com/wenzhang/334.html',
-            title: '与调香师聊天: 以香水为工作是什么体验？'
-          },
-          {
-            img: 'https://img.xssdcdn.com/article/333/0.jpg!l',
-            url: 'https://www.nosetime.com/wenzhang/333.html',
-            title: '我们如何安全安心的穿越回60年代？'
-          },
-          {
-            img: 'https://img.xssdcdn.com/article/322/0.jpg!l',
-            url: 'https://www.nosetime.com/wenzhang/322.html',
-            title: '趁这些香水还没火，我先悄悄推荐给你'
-          }
-        ],
-        [
-          {
-            img: 'https://img.xssdcdn.com/article/321/0.jpg!l',
-            url: 'https://www.nosetime.com/wenzhang/321.html',
-            title: '香水圈里吵来吵去的“化工感”究竟是什么'
-          },
-          {
-            img: 'https://img.xssdcdn.com/article/319/0.jpg!l',
-            url: 'https://www.nosetime.com/wenzhang/319.html',
-            title: '为你奏一曲充满魔性香味交响乐'
-          },
-          {
-            img: 'https://img.xssdcdn.com/article/330/0.jpg!l',
-            url: 'https://www.nosetime.com/wenzhang/330.html',
-            title: '「日光香」：用一瓶香水把阳光穿在身上'
-          }
-        ]
+        // [
+        //   {
+        //     img: 'https://img.xssdcdn.com/article/334/0.jpg!l',
+        //     url: 'https://www.nosetime.com/wenzhang/334.html',
+        //     title: '与调香师聊天: 以香水为工作是什么体验？'
+        //   },
+        //   {
+        //     img: 'https://img.xssdcdn.com/article/333/0.jpg!l',
+        //     url: 'https://www.nosetime.com/wenzhang/333.html',
+        //     title: '我们如何安全安心的穿越回60年代？'
+        //   },
+        //   {
+        //     img: 'https://img.xssdcdn.com/article/322/0.jpg!l',
+        //     url: 'https://www.nosetime.com/wenzhang/322.html',
+        //     title: '趁这些香水还没火，我先悄悄推荐给你'
+        //   }
+        // ],
+        // [
+        //   {
+        //     img: 'https://img.xssdcdn.com/article/321/0.jpg!l',
+        //     url: 'https://www.nosetime.com/wenzhang/321.html',
+        //     title: '香水圈里吵来吵去的“化工感”究竟是什么'
+        //   },
+        //   {
+        //     img: 'https://img.xssdcdn.com/article/319/0.jpg!l',
+        //     url: 'https://www.nosetime.com/wenzhang/319.html',
+        //     title: '为你奏一曲充满魔性香味交响乐'
+        //   },
+        //   {
+        //     img: 'https://img.xssdcdn.com/article/330/0.jpg!l',
+        //     url: 'https://www.nosetime.com/wenzhang/330.html',
+        //     title: '「日光香」：用一瓶香水把阳光穿在身上'
+        //   }
+        // ]
       ],
       question_info: [
         {

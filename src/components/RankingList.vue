@@ -1,27 +1,5 @@
 <template>
   <div class="top5">
-<!--    <div id="banner_line1">-->
-<!--      <div id="xinshougroup">-->
-<!--        <img id="xinshou_logo" class="sameline" src="../assets/home-8a8a8a.png" alt="返回主页" height="25px" @click="goto_Home">-->
-<!--        <table class="sameline" @click="goto_Home">返回主页</table>-->
-<!--      </div>-->
-<!--      <img id="perfumebox_logo" src="../assets/perfumebox-logo-18.png" alt="logo图片" width="135px" >-->
-<!--      <div id="logingroup">-->
-<!--        <img v-show="!isLogin" id="yonghu_logo" class="sameline" src="../assets/yonghu.png" alt="未登录" height="27px" @click="goto_Login">-->
-<!--        <img v-show="isLogin" class="sameline" src="../assets/logined-8a8a8a.png" alt="已登录" height="27px">-->
-<!--        <table class="sameline" v-show="!isLogin" @click="goto_Login">登录/注册</table>-->
-<!--        <table class="sameline" v-show="isLogin">-->
-<!--          <el-dropdown @command="handleCommand">-->
-<!--            <span class="el-dropdown-link">用户中心</span>-->
-<!--            <el-dropdown-menu slot="dropdown">-->
-<!--              <el-dropdown-item icon="el-icon-goods" command="a">购物车</el-dropdown-item>-->
-<!--              <el-dropdown-item icon="el-icon-star-off" command="b">收藏夹</el-dropdown-item>-->
-<!--              <el-dropdown-item icon="el-icon-user-solid" command="c" devided>退出登录</el-dropdown-item>-->
-<!--            </el-dropdown-menu>-->
-<!--          </el-dropdown>-->
-<!--        </table>-->
-<!--      </div>-->
-<!--    </div>-->
     <Banner/>
     <iframe ref="mainIframe1" src="../../static/card-flip/demo.html" frameborder="0" scrolling="no" width="100%" height="510px"/>
     <div class="link">
@@ -139,8 +117,6 @@ export default {
     loaded() {
       const vm = this.$refs.mainIframe.contentWindow.vm
       console.log('VUE页面加载',vm)
-      // console.log(this.$refs.mainIframe.contentWindow)
-      // vm.func1()
     },
     handle_listen (e){
         this.linkdata=e.data.data

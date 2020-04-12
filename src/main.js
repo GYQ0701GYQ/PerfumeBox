@@ -11,6 +11,7 @@ import VueResource from 'vue-resource'
 import Api from'./api/index.js'
 // 引入工程文件
 import Home from './components/Home.vue'
+import Article from './components/Article.vue'
 import NewMemberGuide from './components/NewMemberGuide.vue'
 import LoginRegister from './components/Login.vue'
 import RankingList from './components/RankingList.vue'
@@ -41,6 +42,15 @@ var router = new VueRouter({
       component: Home,
       meta: {
         title: 'PerfumeBox香水盒子-首页',
+        isLogin: false
+      }
+    },
+    {
+      path: '/Article/:article_num/:article_title',
+      name:'Article',
+      component: Article,
+      meta: {
+        title: 'PerfumeBox香水盒子-文章',
         isLogin: false
       }
     },

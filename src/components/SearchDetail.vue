@@ -5,8 +5,8 @@
       <el-row :gutter="20" style="margin-bottom:20px;margin-top:20px;margin-left:5%;width:90%;" v-for="(each_perfume,index1) in page_data" :key="each_perfume.index">
         <el-col :span="2" style="border-radius: 4px;"><div class="grid-content bg-purple-light">{{(current_page-1)*page_size+index1+1}}</div></el-col>
         <el-col :span="18" style="border-radius: 4px;"><div class="grid-content bg-purple-light"  @click="search_one_perfume(each_perfume)">{{each_perfume}}</div></el-col>
-        <el-col :span="2" style="border-radius: 4px;"><div class="grid-content bg-purple-light"><el-tooltip content="加入购物车" placement="top"><i class="el-icon-goods"/></el-tooltip></div></el-col>
-        <el-col :span="2" style="border-radius: 4px;"><div class="grid-content bg-purple-light"><el-tooltip content="收藏香水" placement="top"><i class="el-icon-star-off"/></el-tooltip></div></el-col>
+        <el-col :span="4" style="border-radius: 4px;"><div class="grid-content bg-purple-light"><el-tooltip content="加入购物车" placement="top"><i class="el-icon-goods" @click="handle_buy('add',each_perfume)"/></el-tooltip></div></el-col>
+<!--        <el-col :span="2" style="border-radius: 4px;"><div class="grid-content bg-purple-light"><el-tooltip content="收藏香水" placement="top"><i class="el-icon-star-off"/></el-tooltip></div></el-col>-->
       </el-row>
       <div class="pagination">
         <el-pagination background layout="total,prev, pager, next, sizes" :current-page="current_page" :page-sizes="[10, 20, 30, 40]" :page-size="page_size" :total="total_num" @size-change="handleSizeChange" @current-change="handleCurrentChange"/>
@@ -86,6 +86,19 @@
       },
       search_one_perfume(perfume_name){
         this.$router.push({name: 'PerfumeDetail', params: {perfume_name:perfume_name}})
+      },
+      handle_buy(handle_type,perfume_name){
+        this.$api.get('/url/api/handle_buy', {
+          handle_type:handle_type,
+          user_name: window.sessionStorage.user,
+          perfume_name:perfume_name
+        }, response => {
+          if (response.status >= 200 && response.status < 300) {
+            this.$message.success(response.data['msg'])
+          } else {
+            console.log('失败',response);//请求失败，response为失败信息
+          }
+        });
       },
       handleCurrentChange(current_page) {
         this.current_page = current_page

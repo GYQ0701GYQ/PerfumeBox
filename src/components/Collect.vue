@@ -113,7 +113,7 @@
     height:auto;
     justify-content: center;
     display: flex;
-    lign-items: center;
+    align-items: center;
   }
   .col_other{
     padding-top: 11px
