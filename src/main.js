@@ -9,6 +9,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import VueWechatTitle from 'vue-wechat-title'
 import VueResource from 'vue-resource'
 import Api from'./api/index.js'
+import 'vue-orgchart/dist/style.min.css'
 // 引入工程文件
 import Home from './components/Home.vue'
 import Article from './components/Article.vue'

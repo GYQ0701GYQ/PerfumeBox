@@ -54,6 +54,8 @@
           <el-row class="detail_row"><el-button icon="el-icon-connection" type="primary" plain @click="show_brief(perfume_info2[2],perfume_info2[7])">简介</el-button></el-row>
         </el-col>
       </el-row>
+      <h3 class="heading">产品关系图</h3>
+      <Graph :perfume_info2="perfume_info2"/>
       <h3 class="heading">其他产品对比</h3>
       <el-tabs type="border-card" v-model="select" style="border-radius: 10px;width: 90%;margin-left: 5%;margin-bottom:5%;" >
         <el-tab-pane name="品牌" label="同品牌产品" :disabled="perfume_info2[8]==='#'">
@@ -262,11 +264,13 @@
 </template>
 
 <script>
+  import Graph from './Graph'
   import Banner from './Banner'
   export default {
     name: 'PerfumeDetail',
     components:{
-      Banner
+      Banner,
+      Graph
     },
     data(){
       return{
